@@ -1,0 +1,109 @@
+.logo {
+    width: auto;
+    height: 52px;
+    margin-top: 26px;
+    margin-bottom: 26px;
+}
+
+.mw {
+    max-width: 1120px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.search-icon {
+    font-size: 36px !important;
+    color: white;
+}
+
+.filter-icon {
+    font-size: 18px !important;
+}
+
+.header {
+    border-color: rgb(221 221 221);
+    border-width: 1px;
+    border-left-width: 0 !important;
+    border-right-width: 0 !important;
+    border-style: solid;
+}
+
+.bg-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../images/bg-building.svg");
+    width: 100%;
+    height: 70vh;
+}
+
+.mp-text {
+    color: white;
+    font-weight: 700;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
+.mp-span {
+    background-color: rgb(35 27 27);
+    display: inline-block;
+}
+
+.mp-s-button {
+    background-color: rgb(229 53 44);
+    border-color: rgb(229 53 44);
+    border-width: 1px;
+    float: right;
+}
+
+.mp-s {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    padding: 1.25rem 1.75rem;
+    border-color: transparent;
+    width: 484px;
+    float: left;
+}
+
+.hidden {
+    display: none;
+}
+
+.wh-full-mw-fit {
+    max-width: fit-content;
+    width: 100%;
+    height: 100%;
+}
+
+.p-7 {
+    padding: 1.75rem;
+}
+
+.pt-10 {
+    padding-top: 2.5rem;
+}
+
+.pb-7 {
+    padding-bottom: 1.75rem;
+}
+
+.px-7 {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+}
+
+.p-15px {
+    padding: 15px;
+}
+
+.mx-7 {
+    margin-left: 1.75rem;
+    margin-right: 1.75rem;
+}
+
+.ml-7 {
+    margin-left: 1.75rem;
+}
+
+.mt-32px {
+    margin-top: 32px;;
+}
