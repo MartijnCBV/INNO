@@ -3,6 +3,7 @@ module Main exposing (main)
 import Browser
 import Browser.Navigation as Nav
 import Page.Home as Home
+import Page.Search as Search
 import Url
 import Html exposing (Html)
 
@@ -10,7 +11,7 @@ import Model.Result as Res
 
 import Route
 import Page
-import Model exposing (Model)
+import Model exposing (Model, Msg(..))
 
 
 -- MAIN
@@ -27,7 +28,7 @@ main =
     Browser.application
         { init = init
         , update = update
-        , view = Page.view "Home" Home.view
+        , view = view
         , subscriptions = subscriptions
         , onUrlChange = UrlChanged
         , onUrlRequest = LinkClicked
@@ -40,26 +41,20 @@ main =
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
     ( { results = []
-        , tags = []
-        , query = ""
-        , currentResult = Res.Result
-            { title = ""
-            , tags = []
-            }
-        , key = key
-        , url = url
-        }
+      , tags = []
+      , query = ""
+      , currentResult = Res.Result
+          { title = ""
+          , tags = []
+          }
+      , key = key
+      , url = url
+      }
     , Cmd.none
     )
 
 
 -- UPDATE
-
-
-type Msg
-    = LinkClicked Browser.UrlRequest
-    | UrlChanged Url.Url
-    | UpdateQuery String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -85,6 +80,25 @@ update msg model =
             ( { model | url = url }
             , Cmd.none
             )
+
+
+-- VIEW
+
+
+view : Model -> Document Msg
+view model =
+    case Route.fromUrl model.url of
+        Just Route.Home ->
+            Page.view "Home" Home.view model
+
+        Just Route.Search ->
+            Page.view "Search" Search.view model
+
+        Just Route.Result ->
+            Page.view "Home" Home.view model
+
+        Nothing ->
+            Page.view "Home" Home.view model
 
 
 -- SUBSCRIPTIONS
