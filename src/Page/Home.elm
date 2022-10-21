@@ -15,11 +15,14 @@ import Route
 view : Model -> Html Msg
 view model =
     div [ S.class [ S.bg_image ] ]
-        [ h1 [ S.class [ S.pt_10, S.mp_text ] ]
-            [ span [ S.class [ S.mp_span, S.p_7, S.mx_7 ] ] [ text "Zoek in data" ]
+        [ div [ S.class [ S.mw ] ]
+            [ h1 [ S.class [ S.pt_10, S.mp_text ] ]
+                [ span [ S.class [ S.mp_span, S.p_7, S.mx_7 ] ] [ text "Zoek in data" ]
+                ]
+            , searchBar model
             ]
-        , searchBar model
         ]
+
 
 
 searchBar : Model -> Html Msg
