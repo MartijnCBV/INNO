@@ -7,8 +7,6 @@ import Page.Search as Search
 import Url
 import Html exposing (Html)
 
-import Model.Result as Res
-
 import Route
 import Page
 import Model exposing (Model, Msg(..))
@@ -43,7 +41,7 @@ init flags url key =
     ( { results = []
       , tags = []
       , query = ""
-      , currentResult = Res.Result
+      , currentResult = Model.Result
           { title = ""
           , tags = []
           }
@@ -78,6 +76,11 @@ update msg model =
 
         UrlChanged url ->
             ( { model | url = url }
+            , Cmd.none
+            )
+
+        ResultClicked res ->
+            ( { model | currentResult = res }
             , Cmd.none
             )
 
