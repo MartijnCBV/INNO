@@ -39,8 +39,6 @@ type Result =
         , tags : Tags
         , subject : Subject
         , description : Description
-        , contactData : ContactData
-        , metaData : MetaData
         }
 
 
@@ -79,12 +77,15 @@ type alias ShortDescription =
     String
 
 
+-- TEMP
+{-
 type ContactData =
     ContactData
 
 
 type MetaData =
     MetaData
+-}
 
 
 type alias Query =

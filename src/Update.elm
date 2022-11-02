@@ -1,4 +1,4 @@
-module Update exposing (..)
+module Update exposing (update)
 
 import Model exposing (Model, Msg(..))
 import Browser

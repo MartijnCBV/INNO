@@ -3,7 +3,7 @@ module Main exposing (main)
 import Browser
 import Browser.Navigation as Nav
 import Url
-import Model exposing (Model, Msg(..), ContactData, MetaData, Description)
+import Model exposing (Model, Msg(..))
 import View exposing (view)
 import Update exposing (update)
 
@@ -27,7 +27,7 @@ main =
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
-init flags url key =
+init _ url key =
     ( { results = []
       , tags = []
       , query = ""
@@ -35,12 +35,10 @@ init flags url key =
           { title = ""
           , tags = []
           , subject = ""
-          , description = Description
+          , description = Model.Description
               { longDescription = ""
               , shortDescription = ""
               }
-          , contactData = ContactData
-          , metaData = MetaData
           }
       , key = key
       , url = url

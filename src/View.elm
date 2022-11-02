@@ -1,4 +1,4 @@
-module View exposing (..)
+module View exposing (view)
 
 import Model exposing (Model, Msg, Document)
 import Route

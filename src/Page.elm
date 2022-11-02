@@ -1,4 +1,4 @@
-module Page exposing (..)
+module Page exposing (view)
 
 import Browser exposing (Document)
 import Html exposing (..)
