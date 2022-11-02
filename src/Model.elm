@@ -4,6 +4,7 @@ import Browser
 
 import Browser.Navigation as Nav
 import Url
+import Html exposing (Html)
 
 
 -- MODEL
@@ -19,6 +20,12 @@ type alias Model =
     }
 
 
+type alias Document msg =
+    { title : String
+    , body : List (Html msg)
+    }
+
+
 type Msg
     = LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
@@ -30,10 +37,14 @@ type Result =
     Result
         { title : Title
         , tags : Tags
+        , subject : Subject
+        , description : Description
+        , contactData : ContactData
+        , metaData : MetaData
         }
 
 
-type alias  Results =
+type alias Results =
     List Result
 
 
@@ -47,6 +58,33 @@ type alias Tag =
 
 type alias Tags =
     List Tag
+
+
+type alias Subject =
+    String
+
+
+type Description =
+    Description
+        { longDescription : LongDescription
+        , shortDescription : ShortDescription
+        }
+
+
+type alias LongDescription =
+    String
+
+
+type alias ShortDescription =
+    String
+
+
+type ContactData =
+    ContactData
+
+
+type MetaData =
+    MetaData
 
 
 type alias Query =
