@@ -15,8 +15,6 @@ import Docs.ReviewAtDocs
 import NoConfusingPrefixOperator
 import NoDebug.Log
 import NoDebug.TodoOrToString
-import NoExposingEverything
-import NoImportingEverything
 import NoMissingTypeAnnotation
 import NoMissingTypeAnnotationInLetIn
 import NoMissingTypeExpose
@@ -29,6 +27,7 @@ import NoUnused.Exports
 import NoUnused.Parameters
 import NoUnused.Patterns
 import NoUnused.Variables
+import NoForbiddenWords
 import Review.Rule as Rule exposing (Rule)
 import Simplify
 
@@ -52,5 +51,6 @@ config =
     , NoUnused.Parameters.rule
     , NoUnused.Patterns.rule
     , NoUnused.Variables.rule
+    , NoForbiddenWords.rule [ "@TODO" ]
     , Simplify.rule Simplify.defaults
     ]
