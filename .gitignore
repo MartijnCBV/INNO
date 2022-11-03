@@ -2,4 +2,4 @@
 elm-stuff
 INNO-Frontend-Elm.iml
 elm.js
-main.js
+frontend/main.js
