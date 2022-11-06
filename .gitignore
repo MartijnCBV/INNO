@@ -1,5 +1,5 @@
 .idea
 elm-stuff
-INNO-Frontend-Elm.iml
+*.iml
 elm.js
 frontend/main.js
