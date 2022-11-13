@@ -1,0 +1,103 @@
+\documentclass{article}
+
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[dutch]{babel}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=blue,      
+    urlcolor=blue,
+    pdftitle={FO Digtal Twins API},
+    pdfpagemode=FullScreen,
+}
+
+\title{Kennisgaten}
+\author{Martijn Voorwinden 1776622}
+\date{10-11-2022}
+
+\newcommand{\ls}[8]{
+    \maketitle
+    \section*{Kennisgaten}
+    \subsection*{Inleiding}
+    #1
+    \subsection*{Criteria}
+    \begin{itemize}
+        \item Kennis opdoen en kunnen toepassen binnen context.
+    \end{itemize}
+    \subsection*{Learning / Research Story}
+    \textbf{#2}
+    % ss van story in backlog
+    #3
+    \subsubsection*{Acceptatiecriteria}
+    % itemize
+    #4
+    \subsubsection*{Definition of Done (DoD)}
+    % itemize
+    #5
+    \subsubsection*{Estimate}
+    #6
+    \subsubsection*{Artifacten / Realisatie}
+    #7
+    \subsubsection*{Bronnen}
+    #8
+}
+
+\begin{document}
+    \ls
+    {
+        Voor provincie Utrecht moet er een datacatalogus gemaakt worden om de me-
+        dewerkers makkelijker toegang te geven tot de verschillende databronnen in de
+        verschillende afdelingen van de provincie. Dit is nodig om te zorgen dat er geen
+        dubbele datasets worden aangeschaft en om de zoektijd naar relevante datasets
+        te verkleinen. Mijn rol binnen dit project is developer.
+    }
+    {
+        Als student wil ik leren hoe ik een graphical user interface (GUI) doormiddel van HTML en CSS maak in elm zodat ik een GUI kan maken voor het project.
+    }
+    {
+        \begin{figure}[H]
+            \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{ls_01.png}
+            \caption{\href{https://dev.azure.com/HU-HBO-ICT/2022-INNO-400-Provincie\%20Utrecht/_backlogs/backlog/2022-INNO-400-Provincie\%20Utrecht\%20Team/Epics/?workitem=96710}{De learning story in devops.}}
+            \label{fig:ls_01}
+        \end{figure}
+        Voor het project wil ik graag weten hoe ik een GUI kan maken in elm doormiddel van HTML en CSS,\
+        zodat gebruikers gebruik kunnen maken van het gemaakte product.
+    }
+    {
+        \begin{itemize}
+            \item Er zijn verschillende bronnen over een GUI maken in elm gevonden.
+            \item Er is een test GUI gemaakt.
+        \end{itemize}
+    }
+    {
+        \begin{itemize}
+            \item De learning story is behaald wanneer deze op niveau is.
+            \item De learning is gereviewd door een medestudent.
+            \item De docent gaat akkoord met het resultaat van de learning story.
+        \end{itemize}
+        %\begin{itemize}
+        %    \item Er zijn bronnen gevonden.
+        %    \item De gevonden bronnen zijn bestudeerd.
+        %    \item De geleerde kennis is toegepast in een test applicatie.
+        %\end{itemize}
+    }
+    {
+        De estimate voor deze learning story is 1-2 uren, dit omdat het een relatief simpel iets is.
+    }
+    {
+        \begin{itemize}
+            \item \url{https://github.com/MartijnCBV/INNO/blob/ls_01_elm_expose_gui/frontend/src/Page/Home.elm}
+        \end{itemize}
+    }
+    {
+        \begin{itemize}
+            \item \url{https://guide.elm-lang.org/architecture/buttons.html}
+            \item \url{https://guide.elm-lang.org/architecture/text_fields.html}
+            \item \url{https://guide.elm-lang.org/architecture/forms.html}
+            \item \url{https://github.com/rtfeldman/elm-spa-example}
+        \end{itemize}
+    }
+\end{document}
