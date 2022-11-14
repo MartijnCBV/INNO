@@ -3,7 +3,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
 \usepackage{csquotes}
+
 \usepackage{vhistory}
+\renewcommand \vhAuthorColWidth{.45\hsize}
+\renewcommand \vhChangeColWidth{1.55\hsize}
 
 \usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
 \addbibresource{refs.bib}
@@ -21,27 +24,30 @@
 
 \title{INNO Verantwoordings document}
 \author{Martijn Voorwinden (MV)   1776622}
-\date{Versie 1.1 / 2022-11-01}
+\date{Versie 2.0 / 2022-11-14}
 
 \begin{document}
     \maketitle
     \begin{versionhistory}
         \vhEntry{1.0}{2022-10-30}{MV}{Bestand aangemaakt}
         \vhEntry{1.1}{2022-11-01}{MV}{Aangepast na review}
+        \vhEntry{2.0}{2022-11-14}{MV}{Uitbreiding gebruikte technologiën, code structuur}
     \end{versionhistory}
     \newpage
     \tableofcontents
     \chapter{Opdracht}
-    Voor de provincie Utrecht moet er een proof of concept (PoC) van een data catalogus ontwikkelt worden,
-    dit is nodig om de verschillende databronnen binnen de provincie makkelijker vindbaar te maken.
+    Voor provincie Utrecht moet er een proof of concept (PoC) van een \\
+    datacatalogus gemaakt worden zodat de provincie aan de hand hiervan een potentiële aanbesteding te doen.  
+    Een datacatalogus zal er voor kunnen zorgen dat het makkelijker is om de medewerkers toegang te geven tot de verschillende databronnen in de verschillende afdelingen van de provincie. 
+    Dit is nodig om te zorgen dat er geen dubbele datasets worden aangeschaft en om de zoektijd naar relevante datasets te verkleinen.
 
     \chapter{Gebruikte technologiën}
     Er is besloten om de data catalogus te maken in microsoft purview en een web front-end in elm,
-     om dit te faciliteren en credentials te verbergen zal er in python middleware gemaakt worden.
+    om dit te faciliteren en credentials te verbergen zal er in python middleware gemaakt worden.
     \section{Microsoft purview}
     Microsoft purview is een data management systeem wat onder andere gebruikt kan worden om een data catalogus op te zetten en in verscheidene databronnen te zoeken \cite{purview}.
     Er is voor microsoft purview gekozen omdat de Provincie Utrecht al met veel microsoft producten werkten en dus het koppelen met andere interne \\ producten makkelijker is.
-    \subsection*{Blue Dolphin Data}
+    \subsubsection*{Blue Dolphin Data}
     Een potentieel alternatief voor microsoft purview zou de blue dolphin data module \cite{blue-dolphin} kunnen zijn,
     hier is van af gezien omdat hierbij een boel voor het project onnodige tools zijn inbegrepen waar wel voor betaald zou moeten worden.
     Voor het deel waar het project gebruik van maakt zou het vrijwel hetzelfde als microsoft purview werken en geen meerwaarde bieden.
@@ -50,14 +56,18 @@
     Er is voor elm gekozen omdat het sterke getypeerd is en een rigide compiler heeft,
     dit zorgt ervoor dat er geen runtime errors zijn, maar alle errors op compile time worden gegooid.
     Elm is ook een technologie die het team graag wil leren.
-    \subsection*{Alternatieven}
     \subsubsection*{Purescript}
     Purescript is een potentieel alternatief voor elm, het lijkt erg op elm omdat ze beide zijn gebasseerd op haskell en gecompileerd kunnen worden naar JavaScript \cite{purescript},
     er is voor elm gekozen inplaats van Purescript omdat er meer documentatie over elm te vinden is.
     \subsubsection*{Typescript}
-    Typescript is een superset van JavaScript welke de mogelijkheid bied om code in JavaScript statisch getypeerd te maken,
-    er is voor elm in plaats van Typescript gekozen omdat elm het statisch typeren verplicht in tegenstelling tot Typescript waar het optioneel is.
+    Typescript is een superset van JavaScript welke de mogelijkheid bied om code in JavaScript statisch getypeerd te maken \cite{typescript}.
+    Er is voor elm in plaats van Typescript gekozen omdat elm het statisch typeren verplicht in tegenstelling tot Typescript waar het optioneel is.
     Dit zorgt er voor dat bepaalde fouten wel in Typescript gemaakt kunnen worden, en niet in elm omdat in het geval van elm ze er al door de compiler uit gehaald worden.
+    \section{Python}
+    Python is een general-purpose programeertaal taal die goed ondersteund wordt door microsoft producten \cite{python}\cite{purview-python},
+    omdat microsoft purview een relatief nieuw product is,
+    is er op het moment alleen een SDK voor python,
+    om deze reden is er voor gekozen om python te gebruiken voor het maken van de middleware.
 
     \chapter{Code structuur}
     \section{Opdeling in modules (Elm)}
@@ -82,6 +92,21 @@
         \item De body van een declaratie begint 1 regel onder de declaratie.
         \item Er is geen overbodige indentatie.
     \end{itemize}
+    \section{Elm-Review}
+    Elm-Review is een elm package welke in essentie een linter is,
+    dit kan gebruikt worden om de code aan bepaalde eisen te laten voldoen \cite{elm-review}.
+    Voor het project is ook Elm-Review gebruikt \cite{proj-elm-review},
+    deze is ingesteld met de volgende regels:
+    \begin{enumerate}
+        \item NoConfusingPrefixOperator.rule
+        \item NoDebug.*.rule
+        \item NoMissing*.rule
+        \item NoSimpleLetBody.rule
+        \item NoPrematureLetComputation.rule
+        \item NoUnused.*.rule
+        \item NoForbiddenWords.rule [ "@TODO" ]
+    \end{enumerate}
+    Deze regels zijn gebaseerd op de elm application template van elm-review \cite{elm-review-template}.
 
     \newpage
     \nocite{*}

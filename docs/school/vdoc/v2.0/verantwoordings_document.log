@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.6.22)  14 NOV 2022 16:58
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.6.22)  14 NOV 2022 18:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -427,26 +427,26 @@ Package csquotes Info: Redefining alias 'default' -> 'dutch'.
  (./verantwoordings_document.aux)
 \openout1 = `verantwoordings_document.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 26.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 29.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 29.
  (c:/texlive/2022/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
 \c@lstlisting=\count409
 Package biblatex Info: Trying to load language 'dutch'...
 Package biblatex Info: ... file 'dutch.lbx' found.
@@ -462,12 +462,12 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'verantwoordings_document.bbl' found.
  (./verantwoordings_document.bbl)
-Package biblatex Info: Reference section=0 on input line 26.
-Package biblatex Info: Reference segment=0 on input line 26.
+Package biblatex Info: Reference section=0 on input line 29.
+Package biblatex Info: Reference segment=0 on input line 29.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 27.
+(Font)              <14.4> on input line 30.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 27.
+(Font)              <7> on input line 30.
  [1
 
 ]
@@ -476,7 +476,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \vh@hstfile=\write5
 \openout5 = `verantwoordings_document.hst'.
 
- (./verantwoordings_document.ver) (./verantwoordings_document.ver) (./verantwoordings_document.ver) [1
+ (./verantwoordings_document.ver) (./verantwoordings_document.ver) (./verantwoordings_document.ver
+Overfull \hbox (4.61827pt too wide) in paragraph at lines 4--5
+[]|\TU/lmr/bx/n/12 Auteur(s)| 
+ []
+
+) [1
 
 ] (./verantwoordings_document.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -493,52 +498,67 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ]
 Hoofdstuk 1.
+
+Overfull \hbox (0.58139pt too wide) in paragraph at lines 39--43
+\TU/lmr/m/n/12 potentiële aanbesteding te doen. Een datacatalogus zal er voor kunnen zorgen
+ []
+
+
+Overfull \hbox (4.16405pt too wide) in paragraph at lines 39--43
+\TU/lmr/m/n/12 dat het makkelijker is om de medewerkers toegang te geven tot de verschillende
+ []
+
+
+Overfull \hbox (4.47739pt too wide) in paragraph at lines 39--43
+\TU/lmr/m/n/12 databronnen in de verschillende afdelingen van de provincie. Dit is nodig om te
+ []
+
+
+Overfull \hbox (5.47205pt too wide) in paragraph at lines 39--43
+\TU/lmr/m/n/12 zorgen dat er geen dubbele datasets worden aangeschaft en om de zoektijd naar
+ []
+
 [3
 
 ]
 Hoofdstuk 2.
 
-Overfull \hbox (2.27203pt too wide) in paragraph at lines 42--44
+Overfull \hbox (2.27203pt too wide) in paragraph at lines 48--50
 \TU/lmr/m/n/12 Microsoft purview is een data management systeem wat onder andere gebruikt
  []
 
 
-Overfull \hbox (3.45605pt too wide) in paragraph at lines 42--44
+Overfull \hbox (3.45605pt too wide) in paragraph at lines 48--50
 \TU/lmr/m/n/12 kan worden om een data catalogus op te zetten en in verscheidene databronnen
  []
 
 
-Overfull \hbox (5.2934pt too wide) in paragraph at lines 42--44
+Overfull \hbox (5.2934pt too wide) in paragraph at lines 48--50
 \TU/lmr/m/n/12 te zoeken [1]. Er is voor microsoft purview gekozen omdat de Provincie Utrecht
  []
 
 
-Overfull \hbox (9.62405pt too wide) in paragraph at lines 42--44
+Overfull \hbox (9.62405pt too wide) in paragraph at lines 48--50
 \TU/lmr/m/n/12 al met veel microsoft producten werkten en dus het koppelen met andere interne 
  []
 
 [4
 
-] [5]
+]
+Overfull \hbox (5.32803pt too wide) in paragraph at lines 67--71
+\TU/lmr/m/n/12 Python is een general-purpose programeertaal taal die goed ondersteund wordt
+ []
+
+[5]
 Hoofdstuk 3.
 [6
 
-]
-Overfull \hbox (36.5613pt too wide) in paragraph at lines 89--89
-[]\TU/lmr/m/it/12 Unified Data Governance with Microsoft Purview: Microsoft Azure\TU/lmr/m/n/12 . \TU/lmr/m/sc/12 url\TU/lmr/m/n/12 : $[][][][][] []
+] [7]
+Overfull \hbox (1.36192pt too wide) in paragraph at lines 114--114
+[]\TU/lmr/m/n/12 Voorwinden, Martijn. \TU/lmr/m/it/12 Project repo - elm-review\TU/lmr/m/n/12 . \TU/lmr/m/sc/12 url\TU/lmr/m/n/12 : $[][][][][] [] [] [] [][][][][][] []
  []
 
-
-Overfull \hbox (15.65157pt too wide) in paragraph at lines 89--89
-[] [] [][][] [] [][][][][][][][][] [] [][][] [] [][] [][] [][] [] [][][][][][][][] [] [][][][][][][][] [] [][][][][][][][][] [][] [][][][][][][]$\TU/lmr/m/n/12 . 
- []
-
-
-Overfull \hbox (9.84175pt too wide) in paragraph at lines 89--89
-[]\TU/lmr/m/n/12 Czaplicki, Evan. \TU/lmr/m/it/12 Modules\TU/lmr/m/n/12 . \TU/lmr/m/sc/12 url\TU/lmr/m/n/12 : $[][][][][] [] [] [] [][][][][] [] [][][] [][] [][][][] [] [][][] [] [][][][][][][] []
- []
-
-[7
+[8
 
 ] (./verantwoordings_document.aux)
 Package logreq Info: Writing requests to 'verantwoordings_document.run.xml'.
@@ -546,12 +566,12 @@ Package logreq Info: Writing requests to 'verantwoordings_document.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 12616 strings out of 475883
- 235283 string characters out of 5806043
- 994749 words of memory out of 5000000
- 33529 multiletter control sequences out of 15000+600000
+ 12641 strings out of 475883
+ 236180 string characters out of 5806043
+ 1002079 words of memory out of 5000000
+ 33554 multiletter control sequences out of 15000+600000
  472988 words of font info for 50 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  69i,6n,77p,1145b,4752s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on verantwoordings_document.pdf (8 pages).
+Output written on verantwoordings_document.pdf (9 pages).

@@ -2348,15 +2348,27 @@
     <bcf:citekey order="2">blue-dolphin</bcf:citekey>
     <bcf:citekey order="3">elm</bcf:citekey>
     <bcf:citekey order="4">purescript</bcf:citekey>
-    <bcf:citekey order="5">elm-modules</bcf:citekey>
-    <bcf:citekey order="6">elm-style</bcf:citekey>
+    <bcf:citekey order="5">typescript</bcf:citekey>
+    <bcf:citekey order="6">python</bcf:citekey>
+    <bcf:citekey order="7">purview-python</bcf:citekey>
+    <bcf:citekey order="8">elm-modules</bcf:citekey>
+    <bcf:citekey order="9">elm-style</bcf:citekey>
+    <bcf:citekey order="10">elm-review</bcf:citekey>
+    <bcf:citekey order="11">proj-elm-review</bcf:citekey>
+    <bcf:citekey order="12">elm-review-template</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
-    <bcf:citekey order="7">purview</bcf:citekey>
-    <bcf:citekey order="8">blue-dolphin</bcf:citekey>
-    <bcf:citekey order="9">elm</bcf:citekey>
-    <bcf:citekey order="10">purescript</bcf:citekey>
-    <bcf:citekey order="11">elm-modules</bcf:citekey>
-    <bcf:citekey order="12">elm-style</bcf:citekey>
+    <bcf:citekey order="13">purview</bcf:citekey>
+    <bcf:citekey order="14">blue-dolphin</bcf:citekey>
+    <bcf:citekey order="15">elm</bcf:citekey>
+    <bcf:citekey order="16">purescript</bcf:citekey>
+    <bcf:citekey order="17">typescript</bcf:citekey>
+    <bcf:citekey order="18">python</bcf:citekey>
+    <bcf:citekey order="19">purview-python</bcf:citekey>
+    <bcf:citekey order="20">elm-modules</bcf:citekey>
+    <bcf:citekey order="21">elm-style</bcf:citekey>
+    <bcf:citekey order="22">elm-review</bcf:citekey>
+    <bcf:citekey order="23">proj-elm-review</bcf:citekey>
+    <bcf:citekey order="24">elm-review-template</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

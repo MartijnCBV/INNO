@@ -1,0 +1,258 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{purview}{online}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{title}{Unified Data Governance with Microsoft Purview: Microsoft Azure}
+      \verb{urlraw}
+      \verb https://www.microsoft.com/nl-nl/security/business/microsoft-purview
+      \endverb
+      \verb{url}
+      \verb https://www.microsoft.com/nl-nl/security/business/microsoft-purview
+      \endverb
+    \endentry
+    \entry{blue-dolphin}{online}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{title}{Data management - valueblue}
+      \verb{urlraw}
+      \verb https://valueblue.com/en/uc/data-management/
+      \endverb
+      \verb{url}
+      \verb https://valueblue.com/en/uc/data-management/
+      \endverb
+    \endentry
+    \entry{elm}{online}{}
+      \name{author}{1}{}{%
+        {{hash=43adeb4abd5f7f3e5e08490454ace101}{%
+           family={{Czaplicki, Evan}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{fullhash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{bibnamehash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{authorbibnamehash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{authornamehash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{authorfullhash}{43adeb4abd5f7f3e5e08490454ace101}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Elm}
+      \verb{urlraw}
+      \verb https://elm-lang.org/
+      \endverb
+      \verb{url}
+      \verb https://elm-lang.org/
+      \endverb
+    \endentry
+    \entry{purescript}{online}{}
+      \name{author}{1}{}{%
+        {{hash=7c505bd97a6702f5b25b5b7fddef7a5c}{%
+           family={{Freeman, Phil}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{7c505bd97a6702f5b25b5b7fddef7a5c}
+      \strng{fullhash}{7c505bd97a6702f5b25b5b7fddef7a5c}
+      \strng{bibnamehash}{7c505bd97a6702f5b25b5b7fddef7a5c}
+      \strng{authorbibnamehash}{7c505bd97a6702f5b25b5b7fddef7a5c}
+      \strng{authornamehash}{7c505bd97a6702f5b25b5b7fddef7a5c}
+      \strng{authorfullhash}{7c505bd97a6702f5b25b5b7fddef7a5c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{purescript}
+      \verb{urlraw}
+      \verb https://www.purescript.org/
+      \endverb
+      \verb{url}
+      \verb https://www.purescript.org/
+      \endverb
+    \endentry
+    \entry{typescript}{online}{}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labeltitlesource}{title}
+      \field{title}{TypeScript}
+      \verb{urlraw}
+      \verb https://www.typescriptlang.org/
+      \endverb
+      \verb{url}
+      \verb https://www.typescriptlang.org/
+      \endverb
+    \endentry
+    \entry{python}{online}{}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labeltitlesource}{title}
+      \field{title}{Python}
+      \verb{urlraw}
+      \verb https://www.python.org/
+      \endverb
+      \verb{url}
+      \verb https://www.python.org/
+      \endverb
+    \endentry
+    \entry{purview-python}{online}{}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labeltitlesource}{title}
+      \field{title}{Purview Python SDK}
+      \verb{urlraw}
+      \verb https://learn.microsoft.com/en-us/azure/purview/tutorial-using-python-sdk
+      \endverb
+      \verb{url}
+      \verb https://learn.microsoft.com/en-us/azure/purview/tutorial-using-python-sdk
+      \endverb
+    \endentry
+    \entry{elm-modules}{online}{}
+      \name{author}{1}{}{%
+        {{hash=43adeb4abd5f7f3e5e08490454ace101}{%
+           family={{Czaplicki, Evan}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{fullhash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{bibnamehash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{authorbibnamehash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{authornamehash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{authorfullhash}{43adeb4abd5f7f3e5e08490454ace101}
+      \field{extraname}{2}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Modules}
+      \verb{urlraw}
+      \verb https://guide.elm-lang.org/webapps/modules.html
+      \endverb
+      \verb{url}
+      \verb https://guide.elm-lang.org/webapps/modules.html
+      \endverb
+    \endentry
+    \entry{elm-style}{online}{}
+      \name{author}{1}{}{%
+        {{hash=43adeb4abd5f7f3e5e08490454ace101}{%
+           family={{Czaplicki, Evan}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{fullhash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{bibnamehash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{authorbibnamehash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{authornamehash}{43adeb4abd5f7f3e5e08490454ace101}
+      \strng{authorfullhash}{43adeb4abd5f7f3e5e08490454ace101}
+      \field{extraname}{3}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Style guide}
+      \verb{urlraw}
+      \verb https://elm-lang.org/docs/style-guide
+      \endverb
+      \verb{url}
+      \verb https://elm-lang.org/docs/style-guide
+      \endverb
+    \endentry
+    \entry{elm-review}{online}{}
+      \name{author}{1}{}{%
+        {{hash=916f18b84bd297659f4b51ac84ae70be}{%
+           family={{Mengels, JF}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{916f18b84bd297659f4b51ac84ae70be}
+      \strng{fullhash}{916f18b84bd297659f4b51ac84ae70be}
+      \strng{bibnamehash}{916f18b84bd297659f4b51ac84ae70be}
+      \strng{authorbibnamehash}{916f18b84bd297659f4b51ac84ae70be}
+      \strng{authornamehash}{916f18b84bd297659f4b51ac84ae70be}
+      \strng{authorfullhash}{916f18b84bd297659f4b51ac84ae70be}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{elm-review}
+      \verb{urlraw}
+      \verb https://package.elm-lang.org/packages/jfmengels/elm-review/latest/
+      \endverb
+      \verb{url}
+      \verb https://package.elm-lang.org/packages/jfmengels/elm-review/latest/
+      \endverb
+    \endentry
+    \entry{proj-elm-review}{online}{}
+      \name{author}{1}{}{%
+        {{hash=87cae84ebf9b898518ee8e9dff67ef31}{%
+           family={{Voorwinden, Martijn}},
+           familyi={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{87cae84ebf9b898518ee8e9dff67ef31}
+      \strng{fullhash}{87cae84ebf9b898518ee8e9dff67ef31}
+      \strng{bibnamehash}{87cae84ebf9b898518ee8e9dff67ef31}
+      \strng{authorbibnamehash}{87cae84ebf9b898518ee8e9dff67ef31}
+      \strng{authornamehash}{87cae84ebf9b898518ee8e9dff67ef31}
+      \strng{authorfullhash}{87cae84ebf9b898518ee8e9dff67ef31}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Project repo - elm-review}
+      \verb{urlraw}
+      \verb https://github.com/MartijnCBV/INNO/tree/master/frontend/review
+      \endverb
+      \verb{url}
+      \verb https://github.com/MartijnCBV/INNO/tree/master/frontend/review
+      \endverb
+    \endentry
+    \entry{elm-review-template}{online}{}
+      \name{author}{1}{}{%
+        {{hash=916f18b84bd297659f4b51ac84ae70be}{%
+           family={{Mengels, JF}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{916f18b84bd297659f4b51ac84ae70be}
+      \strng{fullhash}{916f18b84bd297659f4b51ac84ae70be}
+      \strng{bibnamehash}{916f18b84bd297659f4b51ac84ae70be}
+      \strng{authorbibnamehash}{916f18b84bd297659f4b51ac84ae70be}
+      \strng{authornamehash}{916f18b84bd297659f4b51ac84ae70be}
+      \strng{authorfullhash}{916f18b84bd297659f4b51ac84ae70be}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{application template - elm-review}
+      \verb{urlraw}
+      \verb https://github.com/jfmengels/elm-review-config/tree/master/application
+      \endverb
+      \verb{url}
+      \verb https://github.com/jfmengels/elm-review-config/tree/master/application
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

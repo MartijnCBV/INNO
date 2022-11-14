@@ -3,6 +3,8 @@
 \contentsline {chapter}{\numberline {2}Gebruikte technologiën}{4}{}%
 \contentsline {section}{\numberline {2.1}Microsoft purview}{4}{}%
 \contentsline {section}{\numberline {2.2}Elm}{4}{}%
+\contentsline {section}{\numberline {2.3}Python}{5}{}%
 \contentsline {chapter}{\numberline {3}Code structuur}{6}{}%
 \contentsline {section}{\numberline {3.1}Opdeling in modules (Elm)}{6}{}%
 \contentsline {section}{\numberline {3.2}Code stijl (Elm)}{6}{}%
+\contentsline {section}{\numberline {3.3}Elm-Review}{7}{}%
