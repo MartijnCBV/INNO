@@ -1,0 +1,14 @@
+\begin {longtable}{@{}ll>{\hsize =\vhAuthorColWidth }X>{\hsize =\vhChangeColWidth }X@{}}
+\textbf {\vhversionname }
+ & \textbf {\vhdatename }
+ & \textbf {\vhauthorname }
+ & \textbf {\vhchangename }\\[1ex]
+1.0
+ & 2022-10-30
+ & \listset {MV}
+ & Bestand aangemaakt\\
+1.1
+ & 2022-11-01
+ & \listset {MV}
+ & Aangepast na review\\
+\end {longtable}

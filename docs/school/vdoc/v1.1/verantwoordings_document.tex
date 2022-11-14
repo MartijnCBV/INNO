@@ -1,0 +1,65 @@
+\documentclass[12pt, a4paper]{report}
+\usepackage[dutch]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{csquotes}
+\usepackage{vhistory}
+
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{refs.bib}
+
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+\usepackage[explicit]{titlesec}
+\titleformat{\chapter}[display]{\large\bfseries}{}{0pt}{\large\MakeUppercase{#1}}
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+
+\tolerance=1
+\hyphenpenalty=10000
+\hbadness=10000
+
+\title{INNO Verantwoordings document}
+\author{Martijn Voorwinden (MV)   1776622}
+\date{Versie 1.1 / 2022-11-01}
+
+\begin{document}
+    \maketitle
+    \begin{versionhistory}
+        \vhEntry{1.0}{2022-10-30}{MV}{Bestand aangemaakt}
+        \vhEntry{1.1}{2022-11-01}{MV}{Aangepast na review}
+    \end{versionhistory}
+    \newpage
+    \tableofcontents
+    \chapter{Opdracht}
+    Voor de provincie Utrecht moet er een proof of concept (PoC) van een data catalogus ontwikkelt worden,
+    dit is nodig om de verschillende databronnen binnen de provincie makkelijker vindbaar te maken.
+
+    \chapter{Gebruikte technologiën}
+    --alternatieven typescript linter richtlijnen in het document \\
+
+    Er is besloten om de data catalogus te maken in microsoft purview en een web front-end in elm,
+     om dit te faciliteren en credentials te verbergen zal er in python middleware gemaakt worden.
+    \section{Microsoft purview}
+    Microsoft purview is een data management systeem wat onder andere gebruikt kan worden om een data catalogus op te zetten en in verscheidene databronnen te zoeken \cite{purview}.
+    Er is voor microsoft purview gekozen omdat de Provincie Utrecht al met veel microsoft producten werkten en dus het koppelen met andere interne \\ producten makkelijker is.
+    \section{Elm}
+    Elm is een functionele programeertaal die compileert naar JavaScript en als een alternatief voor JavaScript gebruikt kan worden \cite{elm}.
+    Er is voor elm gekozen omdat het sterke getypeerd is en een rigide compiler heeft,
+    dit zorgt ervoor dat er geen runtime errors zijn, maar alle errors op compile time worden gegooid.
+    Elm is ook een technologie die het team graag wil leren.
+    \section{Python}
+    python purview sdk idk bro
+
+    \chapter{Code structuur}
+    \section{Opdeling in modules (Elm)}
+    Om de code overzichtelijk en onderhoudbaar te houden moet het opgedeeld worden in verschillende modules,
+    de waarde van deze modules kan beoordeeld worden aan de hand van de officiele elm richtlijnen \cite{elm-modules}.
+    \section{Code stijl (Elm)}
+    Om de code makkelijk overleverbaar te maken moet er gebruik gemaakt worden van een gestandaardiseerde stijl,
+    daarom wordt gebruik gemaakt van de geadviseerde stijl uit de officiële elm documentatie \cite{elm-style}.
+
+    \newpage
+    \nocite{*}
+    \printbibliography
+\end{document}
