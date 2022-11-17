@@ -15,7 +15,7 @@ imageSrc url =
 
 image : String -> Image
 image filename =
-    ("/assets/images/" ++ filename)
+    ("../src/assets/images/" ++ filename)
 
 
 bgBuilding : Image
