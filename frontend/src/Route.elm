@@ -1,8 +1,8 @@
 module Route exposing (Route(..), href, fromUrl)
 
-import Url.Parser as Parser exposing (Parser, map, oneOf, s, top)
-import Html exposing (Attribute)
-import Html.Attributes as Attr
+import Url.Parser
+import Html
+import Html.Attributes
 import Url
 
 
@@ -12,18 +12,18 @@ type Route
     | Result
 
 
-routeParser : Parser ( Route -> a ) a
+routeParser : Url.Parser.Parser ( Route -> a ) a
 routeParser =
-    oneOf
-        [ map Home top
-        , map Search ( s "search" )
-        , map Result ( s "result" )
+    Url.Parser.oneOf
+        [ Url.Parser.map Home Url.Parser.top
+        , Url.Parser.map Search ( Url.Parser.s "search" )
+        , Url.Parser.map Result ( Url.Parser.s "result" )
         ]
 
 
-href : Route -> Attribute msg
+href : Route -> Html.Attribute msg
 href target =
-    Attr.href (routeToString target)
+    Html.Attributes.href (routeToString target)
 
 -- TEMP
 {-
@@ -36,7 +36,7 @@ replaceUrl key route =
 fromUrl : Url.Url -> Maybe Route
 fromUrl url =
     { url | path = Maybe.withDefault "" url.fragment, fragment = Nothing }
-        |> Parser.parse routeParser
+        |> Url.Parser.parse routeParser
 
 
 routeToString : Route -> String

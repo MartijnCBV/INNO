@@ -1,16 +1,16 @@
 module Asset exposing (..)
 
-import Html exposing (Attribute)
-import Html.Attributes as Attr
+import Html
+import Html.Attributes
 
 
 type alias Image =
     String
 
 
-imageSrc : Image -> Attribute msg
+imageSrc : Image -> Html.Attribute msg
 imageSrc url =
-    Attr.src url
+    Html.Attributes.src url
 
 
 image : String -> Image

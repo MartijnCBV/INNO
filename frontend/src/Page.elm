@@ -1,16 +1,16 @@
 module Page exposing (view)
 
-import Browser exposing (Document)
+import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
 
-import Model exposing (Model)
+import Model
 import CSSWrapper as S
 import Asset
 import Route
 
-view : String -> ( Model -> Html msg) -> Model -> Document msg
+view : String -> ( Model.Model -> Html msg) -> Model.Model -> Browser.Document msg
 view title content model =
     { title = title
     , body =

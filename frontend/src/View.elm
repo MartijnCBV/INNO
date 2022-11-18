@@ -1,6 +1,6 @@
 module View exposing (view)
 
-import Model exposing (Model, Msg, Document)
+import Model
 import Route
 import Page
 import Page.Home as Home
@@ -10,7 +10,7 @@ import Page.Search as Search
 -- VIEW
 
 
-view : Model -> Document Msg
+view : Model.Model -> Model.Document Model.Msg
 view model =
     case Route.fromUrl model.url of
         Just Route.Home ->

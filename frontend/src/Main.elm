@@ -1,33 +1,33 @@
 module Main exposing (main)
 
 import Browser
-import Browser.Navigation as Nav
+import Browser.Navigation
 import Url
-import Model exposing (Model, Msg(..))
-import View exposing (view)
-import Update exposing (update)
+import Model
+import View
+import Update
 import RemoteData
 
 
 -- MAIN
 
 
-main : Program () Model Msg
+main : Program () Model.Model Model.Msg
 main =
     Browser.application
         { init = init
-        , update = update
-        , view = view
+        , update = Update.update
+        , view = View.view
         , subscriptions = subscriptions
-        , onUrlChange = UrlChanged
-        , onUrlRequest = LinkClicked
+        , onUrlChange = Model.UrlChanged
+        , onUrlRequest = Model.LinkClicked
         }
 
 
 -- MODEL
 
 
-init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+init : () -> Url.Url -> Browser.Navigation.Key -> ( Model.Model, Cmd Model.Msg )
 init _ url key =
     ( { results = []
       , tags = []
@@ -52,6 +52,6 @@ init _ url key =
 -- SUBSCRIPTIONS
 
 
-subscriptions : Model -> Sub Msg
+subscriptions : Model.Model -> Sub Model.Msg
 subscriptions _ =
     Sub.none

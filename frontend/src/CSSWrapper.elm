@@ -1,12 +1,12 @@
 module CSSWrapper exposing (..)
 
-import Html exposing (Attribute)
-import Html.Attributes as Attr
+import Html
+import Html.Attributes
 
 
-class : List String -> Attribute msg
+class : List String -> Html.Attribute msg
 class classes =
-    Attr.class ( String.join " " classes )
+    Html.Attributes.class ( String.join " " classes )
 
 
 logo : String

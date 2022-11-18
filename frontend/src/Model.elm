@@ -2,7 +2,7 @@ module Model exposing (..)
 
 import Browser
 
-import Browser.Navigation as Nav
+import Browser.Navigation
 import Url
 import Html
 import Http
@@ -17,7 +17,7 @@ type alias Model =
     , tags : Tags
     , query : Query
     , currentResult : Result_
-    , key : Nav.Key
+    , key : Browser.Navigation.Key
     , url : Url.Url
     , queryResp : RemoteData.WebData QueryResp
     }

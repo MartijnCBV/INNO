@@ -2,7 +2,7 @@ module Update exposing (update)
 
 import Model
 import Browser
-import Browser.Navigation as Nav
+import Browser.Navigation
 import Url
 import Http
 import Json.Decode
@@ -25,11 +25,11 @@ update msg model =
             case urlRequest of
                 Browser.Internal url ->
                     ( model
-                    , Nav.pushUrl model.key ( Url.toString url )
+                    , Browser.Navigation.pushUrl model.key ( Url.toString url )
                     )
                 Browser.External href ->
                     ( model
-                    , Nav.load href
+                    , Browser.Navigation.load href
                     )
 
         Model.UrlChanged url ->
