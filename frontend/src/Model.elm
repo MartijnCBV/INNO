@@ -4,37 +4,48 @@ import Browser
 
 import Browser.Navigation as Nav
 import Url
-import Html exposing (Html)
+import Html
+import Http
+import RemoteData
 
 
 -- MODEL
 
 
 type alias Model =
-    { results : Results
+    { results : Results_
     , tags : Tags
     , query : Query
-    , currentResult : Result
+    , currentResult : Result_
     , key : Nav.Key
     , url : Url.Url
+    , queryResp : RemoteData.WebData QueryResp
+    }
+
+
+type alias QueryResp =
+    { query : String
+    , req : String
     }
 
 
 type alias Document msg =
     { title : String
-    , body : List (Html msg)
+    , body : List (Html.Html msg)
     }
 
 
 type Msg
     = LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
-    | UpdateQuery String
-    | ResultClicked Result
+    | UpdateQuery Query
+    | ResultClicked Result_
+    | QueryQuery Query
+    | QueryRespReceived (RemoteData.WebData QueryResp)
 
 
-type Result =
-    Result
+type Result_ =
+    Result_
         { title : Title
         , tags : Tags
         , subject : Subject
@@ -42,8 +53,8 @@ type Result =
         }
 
 
-type alias Results =
-    List Result
+type alias Results_ =
+    List Result_
 
 
 type alias Title =

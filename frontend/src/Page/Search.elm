@@ -1,14 +1,27 @@
 module Page.Search exposing (..)
 
+import Debug
 import Html exposing (..)
 
-import Model exposing (Model, Msg)
+import Model
+import RemoteData
 
 
 -- VIEW
 
 
-view : Model -> Html Msg
+view : Model.Model -> Html Model.Msg
 view model =
-    h1 [] [ text model.query ]
+    case model.queryResp of
+        RemoteData.NotAsked -> text "Initialising."
 
+        RemoteData.Loading -> text "Loading."
+
+        RemoteData.Failure err -> text ("Error: " ++ Debug.toString err)
+
+        RemoteData.Success news -> viewResults model news
+
+
+viewResults : Model.Model -> Model.QueryResp -> Html Model.Msg
+viewResults model queryResp =
+    h1 [] [ text (queryResp.req ++ " " ++  queryResp.query) ]

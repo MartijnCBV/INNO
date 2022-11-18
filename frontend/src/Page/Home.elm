@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
-import Model exposing (Model, Msg(..))
+import Model
 import CSSWrapper as S
 import Route
 
@@ -12,7 +12,7 @@ import Route
 -- VIEW
 
 
-view : Model -> Html Msg
+view : Model.Model -> Html Model.Msg
 view model =
     div [ S.class [ S.bg_image ] ]
         [ div [ S.class [ S.mw ] ]
@@ -25,7 +25,7 @@ view model =
 
 
 
-searchBar : Model -> Html Msg
+searchBar : Model.Model -> Html Model.Msg
 searchBar model =
     div [ S.class [ S.mt_32px ] ]
         [ label
@@ -40,11 +40,11 @@ searchBar model =
                 , type_ "text"
                 , placeholder "Zoek in data"
                 , value model.query
-                , onInput UpdateQuery
+                , onInput Model.UpdateQuery
                 , S.class [ S.mp_s, S.ml_7 ]
                 ] []
             , a [ Route.href Route.Search ]
-                [ button [ type_ "button", S.class [ S.mp_s_button ]  ]
+                [ button [ type_ "button", S.class [ S.mp_s_button ], onClick (Model.QueryQuery model.query)  ]
                     [ i [ S.class [ S.search_icon, S.p_15x, S.material_icons ] ] [ text "search" ]
                     ]
                 ]

@@ -6,6 +6,7 @@ import Url
 import Model exposing (Model, Msg(..))
 import View exposing (view)
 import Update exposing (update)
+import RemoteData
 
 
 -- MAIN
@@ -31,7 +32,7 @@ init _ url key =
     ( { results = []
       , tags = []
       , query = ""
-      , currentResult = Model.Result
+      , currentResult = Model.Result_
           { title = ""
           , tags = []
           , subject = ""
@@ -42,6 +43,7 @@ init _ url key =
           }
       , key = key
       , url = url
+      , queryResp = RemoteData.NotAsked
       }
     , Cmd.none
     )
