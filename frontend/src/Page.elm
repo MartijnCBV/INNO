@@ -10,7 +10,7 @@ import CSSWrapper as S
 import Asset
 import Route
 
-view : String -> ( Model.Model -> Html msg) -> Model.Model -> Browser.Document msg
+view : String -> ( Model.Model -> Html msg ) -> Model.Model -> Browser.Document msg
 view title content model =
     { title = title
     , body =
