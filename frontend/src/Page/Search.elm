@@ -57,7 +57,7 @@ results model resp =
                 ] ]
             [ span [] [ text ( ( String.fromInt resp.searchCount ) ++ " resultaten voor " ++ model.query ) ]
             ] --result info
-        , div [] ( List.map result resp.value ) -- results
+        , div [] ( List.map result ( List.sortBy .searchScore resp.value ) ) -- results
         ]
 
 
@@ -145,6 +145,7 @@ smallSearchBar model =
                     , type_ "text"
                     , placeholder "Zoek in data"
                     , value model.query
+                    , onInput Model.UpdateQuery
                     ] []
                     , button
                         [ type_ "button"
@@ -154,6 +155,7 @@ smallSearchBar model =
                             , S.border
                             , S.border_c_red
                             ]
+                        , onClick (Model.QueryQuery model.query)
                         ]
                         [ i [ S.class
                                 [ S.material_icons
