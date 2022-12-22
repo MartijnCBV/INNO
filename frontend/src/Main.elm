@@ -29,21 +29,11 @@ main =
 
 init : () -> Url.Url -> Browser.Navigation.Key -> ( Model.Model, Cmd Model.Msg )
 init _ url key =
-    ( { results = []
-      , tags = []
-      , query = ""
-      , currentResult = Model.Result_
-          { title = ""
-          , tags = []
-          , subject = ""
-          , description = Model.Description
-              { longDescription = ""
-              , shortDescription = ""
-              }
-          }
+    ( { query = ""
       , key = key
       , url = url
       , queryResp = RemoteData.NotAsked
+      , currentEntity = {  }
       }
     , Cmd.none
     )

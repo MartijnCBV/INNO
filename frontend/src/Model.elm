@@ -3,30 +3,27 @@ module Model exposing (..)
 import Browser
 
 import Browser.Navigation
+import Model.QueryResp
 import Url
 import Html
-import Http
 import RemoteData
+import Model.Entity
 
 
 -- MODEL
 
 
 type alias Model =
-    { results : Results_
-    , tags : Tags
-    , query : Query
-    , currentResult : Result_
+    { query : Query
     , key : Browser.Navigation.Key
     , url : Url.Url
-    , queryResp : RemoteData.WebData QueryResp
+    , queryResp : RemoteData.WebData Model.QueryResp.QueryResp
+    , currentEntity : Model.Entity.Entity
     }
 
 
-type alias QueryResp =
-    { query : String
-    , req : String
-    }
+type alias Query =
+    String
 
 
 type alias Document msg =
@@ -39,65 +36,6 @@ type Msg
     = LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
     | UpdateQuery Query
-    | ResultClicked Result_
     | QueryQuery Query
-    | QueryRespReceived (RemoteData.WebData QueryResp)
-
-
-type Result_ =
-    Result_
-        { title : Title
-        , tags : Tags
-        , subject : Subject
-        , description : Description
-        }
-
-
-type alias Results_ =
-    List Result_
-
-
-type alias Title =
-    String
-
-
-type alias Tag =
-    String
-
-
-type alias Tags =
-    List Tag
-
-
-type alias Subject =
-    String
-
-
-type Description =
-    Description
-        { longDescription : LongDescription
-        , shortDescription : ShortDescription
-        }
-
-
-type alias LongDescription =
-    String
-
-
-type alias ShortDescription =
-    String
-
-
--- TEMP
-{-
-type ContactData =
-    ContactData
-
-
-type MetaData =
-    MetaData
--}
-
-
-type alias Query =
-    String
+    | QueryRespReceived (RemoteData.WebData Model.QueryResp.QueryResp)
+    | QueryEntity Query

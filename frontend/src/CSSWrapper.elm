@@ -37,6 +37,10 @@ mp_text : String
 mp_text = "mp-text"
 
 
+text_2xl : String
+text_2xl = "text-2xl"
+
+
 mp_span : String
 mp_span = "mp-span"
 
@@ -73,6 +77,10 @@ px_7 : String
 px_7 = "px-7"
 
 
+py_3 : String
+py_3 = "py-3"
+
+
 p_15x : String
 p_15x = "p-15px"
 
@@ -91,3 +99,38 @@ mt_32px = "mt-32px"
 
 material_icons : String
 material_icons = "material-icons"
+
+
+border_b : String
+border_b = "border-b"
+
+
+border_c_grey : String
+border_c_grey = "border-c-grey"
+
+
+border_solid : String
+border_solid = "border-solid"
+
+
+grid : String
+grid = "grid"
+
+
+grid_cols_5 : String
+grid_cols_5 = "grid-cols-5"
+
+
+grid_cols_7 : String
+grid_cols_7 = "grid-cols-7"
+
+
+col_span_2 : String
+col_span_2 = "col-span-2"
+
+
+col_span_4 : String
+col_span_4 = "col-span-4"
+
+
+

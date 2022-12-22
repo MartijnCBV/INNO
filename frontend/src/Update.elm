@@ -5,9 +5,9 @@ import Browser
 import Browser.Navigation
 import Url
 import Http
-import Json.Decode
-import Json.Encode
 import RemoteData
+import ServiceVars
+import Model.QueryResp
 
 
 -- UPDATE
@@ -37,18 +37,18 @@ update msg model =
             , Cmd.none
             )
 
-        Model.ResultClicked res ->
-            ( { model | currentResult = res }
-            , Cmd.none
-            )
-
         Model.QueryQuery query ->
-            ( model
+            ( { model | queryResp = RemoteData.NotAsked }
             , getQueryResp query
             )
 
         Model.QueryRespReceived res ->
             ( { model | queryResp = res }
+            , Cmd.none
+            )
+
+        Model.EntityClicked id ->
+            ( {model | currentEntityId = id }
             , Cmd.none
             )
 
@@ -58,20 +58,8 @@ update msg model =
 
 getQueryResp : Model.Query -> Cmd Model.Msg
 getQueryResp query =
-    Http.post
-        { url = "http://localhost:7071/api/QueryHttpTrigger"
-        , body = Http.jsonBody ( queryEncoder query )
-        , expect = Http.expectJson ( RemoteData.fromResult >> Model.QueryRespReceived ) queryRespDecoder
+    Http.get
+        { url = ServiceVars.discoveryEP ++ "?query=" ++ query
+        , expect = Http.expectJson ( RemoteData.fromResult >> Model.QueryRespReceived ) Model.QueryResp.queryRespDecoder
         }
 
-
-queryRespDecoder : Json.Decode.Decoder Model.QueryResp
-queryRespDecoder =
-    Json.Decode.map2 Model.QueryResp
-        (Json.Decode.field "query" Json.Decode.string)
-        (Json.Decode.field "req" Json.Decode.string)
-
-
-queryEncoder : Model.Query -> Json.Encode.Value
-queryEncoder query =
-    Json.Encode.object [ ( "query", Json.Encode.string query ) ]
