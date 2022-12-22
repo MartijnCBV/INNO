@@ -133,4 +133,93 @@ col_span_4 : String
 col_span_4 = "col-span-4"
 
 
+row_span_3 : String
+row_span_3 = "row-span-3"
+
+
+bg_c_grey : String
+bg_c_grey = "bg-c-grey"
+
+
+w_full : String
+w_full = "w-full"
+
+
+mb_3 : String
+mb_3 = "mb-3"
+
+
+text_white : String
+text_white = "text-white"
+
+
+font_bold : String
+font_bold = "font-bold"
+
+
+py_7 : String
+py_7 = "py-7"
+
+
+bg_c_brown : String
+bg_c_brown = "bg-c-brown"
+
+
+py_13px : String
+py_13px = "py-13px"
+
+
+inline_block : String
+inline_block = "inline-block"
+
+
+h_full : String
+h_full = "h-full"
+
+
+max_w_fit : String
+max_w_fit = "max-w-fit"
+
+
+w_400px : String
+w_400px = "w-400px"
+
+
+py_15px : String
+py_15px = "py-15px"
+
+
+text_xl : String
+text_xl = "text-xl"
+
+
+border_transparent : String
+border_transparent = "border-transparent"
+
+
+focus_border_transparent : String
+focus_border_transparent = "focus:border-transparent"
+
+
+float_left : String
+float_left = "float-left"
+
+
+bg_c_red : String
+bg_c_red = "bg-c-red"
+
+
+float_right : String
+float_right = "float-right"
+
+border : String
+border = "border"
+
+
+border_c_red : String
+border_c_red = "border_c_red"
+
+
+p_10px : String
+p_10px = "p-10px"
 

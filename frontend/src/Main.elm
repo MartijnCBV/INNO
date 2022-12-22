@@ -33,7 +33,7 @@ init _ url key =
       , key = key
       , url = url
       , queryResp = RemoteData.NotAsked
-      , currentEntity = {  }
+      , currentEntity = RemoteData.NotAsked
       }
     , Cmd.none
     )

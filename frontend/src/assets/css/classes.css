@@ -154,6 +154,90 @@
     grid-row: span 3 / span 3;
 }
 
-div.feature {
-    position: relative;
+.bg-c-grey {
+    background-color: rgb(221 221 221 / 1);
+}
+
+.w-full {
+    width: 100%;
+}
+
+.mb-3 {
+    margin-bottom: 0.75rem;
+}
+
+.text-white {
+    color: rgb(255 255 255 / 1);
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.py-7 {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+}
+
+.bg-c-brown {
+    background-color: rgb(35 27 27 / 1);
+}
+
+.py-13px {
+    padding-top: 13px;
+    padding-bottom: 13px;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.max-w-fit {
+    max-width: fit-content;
+}
+
+.w-400px {
+    width: 400px;
+}
+
+.py-15px {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+}
+
+.border-transparent {
+    border-color: transparent;
+}
+
+.float_left {
+    float: left;
+}
+
+.bg-c-red {
+    background-color: rgb(229 53 44 / 1);
+}
+
+.float-right {
+    float: right;
+}
+
+.border {
+    border-width: 1px;
+}
+
+.border-c-red {
+    border-color: rgb(229 53 44 / 1);
+}
+
+.p-10px {
+    padding: 10px;
 }

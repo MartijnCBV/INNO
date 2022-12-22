@@ -66,3 +66,8 @@ button, input, optgroup, select, textarea {
 input {
     border-width: 0 !important;
 }
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}

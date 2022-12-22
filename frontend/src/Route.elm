@@ -9,7 +9,7 @@ import Url
 type Route
     = Home
     | Search
-    | Result
+    | Entity
 
 
 routeParser : Url.Parser.Parser ( Route -> a ) a
@@ -17,7 +17,7 @@ routeParser =
     Url.Parser.oneOf
         [ Url.Parser.map Home Url.Parser.top
         , Url.Parser.map Search ( Url.Parser.s "search" )
-        , Url.Parser.map Result ( Url.Parser.s "result" )
+        , Url.Parser.map Entity ( Url.Parser.s "entity" )
         ]
 
 
@@ -53,5 +53,5 @@ routeToPieces route =
         Search ->
             [ "search" ]
 
-        Result ->
-            [ "result" ]
+        Entity ->
+            [ "entity" ]

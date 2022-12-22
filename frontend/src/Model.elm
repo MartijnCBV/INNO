@@ -18,7 +18,7 @@ type alias Model =
     , key : Browser.Navigation.Key
     , url : Url.Url
     , queryResp : RemoteData.WebData Model.QueryResp.QueryResp
-    , currentEntity : Model.Entity.Entity
+    , currentEntity : RemoteData.WebData Model.Entity.Entity
     }
 
 
@@ -37,5 +37,6 @@ type Msg
     | UrlChanged Url.Url
     | UpdateQuery Query
     | QueryQuery Query
-    | QueryRespReceived (RemoteData.WebData Model.QueryResp.QueryResp)
+    | QueryRespReceived ( RemoteData.WebData Model.QueryResp.QueryResp )
     | QueryEntity Query
+    | CurrentEntityReceived ( RemoteData.WebData Model.Entity.Entity )

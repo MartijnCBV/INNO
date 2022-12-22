@@ -47,8 +47,13 @@ update msg model =
             , Cmd.none
             )
 
-        Model.EntityClicked id ->
-            ( {model | currentEntityId = id }
+        Model.QueryEntity query ->
+            ( { model | currentEntity = RemoteData.NotAsked }
+            , getCurrentEntity query
+            )
+
+        Model.CurrentEntityReceived res ->
+            ( { model | currentEntity = res }
             , Cmd.none
             )
 
@@ -61,5 +66,13 @@ getQueryResp query =
     Http.get
         { url = ServiceVars.discoveryEP ++ "?query=" ++ query
         , expect = Http.expectJson ( RemoteData.fromResult >> Model.QueryRespReceived ) Model.QueryResp.queryRespDecoder
+        }
+
+
+getCurrentEntity : Model.Query -> Cmd Model.Msg
+getCurrentEntity query =
+    Http.get
+        { url = ServiceVars.entityEP ++ "?query=" ++ query
+        , expect = Http.expectString ( RemoteData.fromResult >> Model.CurrentEntityReceived )
         }
 

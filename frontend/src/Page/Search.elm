@@ -12,6 +12,7 @@ import Time
 import Model
 import Model.QueryResp
 import Model.DiscoveryEntity
+import Route
 import RemoteData
 import CSSWrapper as S
 
@@ -41,7 +42,7 @@ viewResults model =
 
         RemoteData.Loading -> text "Loading."
 
-        RemoteData.Failure err -> text ("Error: " ++ Debug.toString err)
+        RemoteData.Failure err -> text ( "Error: " ++ Debug.toString err )
 
         RemoteData.Success resp -> results model resp
 
@@ -62,7 +63,7 @@ results model resp =
 
 result : Model.DiscoveryEntity.DiscoveryEntity -> Html Model.Msg
 result discoveryEntity =
-    a [  ] [ div [ S.class
+    a [ Route.href Route.Entity ] [ div [ S.class
                 [ S.border_b
                 , S.border_c_grey
                 , S.border_solid
@@ -86,7 +87,83 @@ result discoveryEntity =
 
 smallSearchBar : Model.Model -> Html Model.Msg
 smallSearchBar model =
-    h1 [] []
+    div [ S.class
+            [ S.bg_c_grey
+            , S.w_full
+            , S.mb_3
+            ]
+        ]
+        [ div
+            [ S.class
+                [ S.mw
+                , S.grid
+                , S.grid_cols_7
+                ]
+            ]
+            [ h1
+                [ S.class
+                    [ S.text_white
+                    , S.text_2xl
+                    , S.font_bold
+                    , S.py_7
+                    , S.col_span_2
+                    ]
+                ]
+                [ span [ S.class
+                    [ S.bg_c_brown
+                    , S.px_7
+                    , S.py_13px
+                    , S.mx_7
+                    , S.inline_block
+                    ] ] [ text "Resultaten" ] ]
+            , div
+                [ S.class
+                    [ S.py_7
+                    , S.col_span_4
+                    ]
+                ]
+                [ label [ for "searchbar", S.class [ S.hidden ] ] [ text "Zoek in data" ]
+                , div
+                    [ S.class
+                        [ S.w_full
+                        , S.h_full
+                        , S.max_w_fit
+                        ]
+                    ]
+                    [ input
+                    [ S.class
+                        [ S.w_400px
+                        , S.ml_7
+                        , S.px_7
+                        , S.py_15px
+                        , S.text_xl
+                        , S.border_transparent
+                        , S.focus_border_transparent
+                        , S.float_left
+                        ]
+                    , id "searchbar"
+                    , type_ "text"
+                    , placeholder "Zoek in data"
+                    , value model.query
+                    ] []
+                    , button
+                        [ type_ "button"
+                        , S.class
+                            [ S.bg_c_red
+                            , S.float_right
+                            , S.border
+                            , S.border_c_red
+                            ]
+                        ]
+                        [ i [ S.class
+                                [ S.material_icons
+                                , S.text_white
+                                , S.search_icon
+                                , S.p_10px
+                                ] ] [ text "search" ] ]
+                    ]
+                ]
+        ] ]
 
 
 filterBar : Model.Model -> Html Model.Msg
