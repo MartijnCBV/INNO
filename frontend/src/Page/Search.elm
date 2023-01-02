@@ -15,6 +15,7 @@ import Model.DiscoveryEntity
 import Route
 import RemoteData
 import CSSWrapper as S
+import Model.Error
 
 
 -- VIEW
@@ -42,7 +43,7 @@ viewResults model =
 
         RemoteData.Loading -> text "Loading."
 
-        RemoteData.Failure err -> text ( "Error: " ++ Debug.toString err )
+        RemoteData.Failure err -> text ( "Error: " ++ Model.Error.errorToString err )
 
         RemoteData.Success resp -> results model resp
 

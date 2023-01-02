@@ -2,6 +2,7 @@ module Page.Entity exposing (..)
 
 import Html exposing (..)
 import Debug
+import Model.Error
 import RemoteData
 
 import Model
@@ -18,7 +19,7 @@ viewEntity model =
 
         RemoteData.Loading -> text "loading"
 
-        RemoteData.Failure err -> text ( "Error: " ++ Debug.toString err )
+        RemoteData.Failure err -> text ( "Error: " ++ Model.Error.errorToString err )
 
         RemoteData.Success resp -> text ( Debug.toString resp )
 
