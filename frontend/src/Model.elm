@@ -8,6 +8,7 @@ import Url
 import Html
 import RemoteData
 import Model.Entity
+import Model.DiscoveryEntity
 
 
 -- MODEL
@@ -19,6 +20,8 @@ type alias Model =
     , url : Url.Url
     , queryResp : RemoteData.WebData Model.QueryResp.QueryResp
     , currentEntity : RemoteData.WebData Model.Entity.Entity
+    , sortType : Model.DiscoveryEntity.SortType
+    , dropdownShown : Bool
     }
 
 
@@ -40,3 +43,5 @@ type Msg
     | QueryRespReceived ( RemoteData.WebData Model.QueryResp.QueryResp )
     | QueryEntity Query
     | CurrentEntityReceived ( RemoteData.WebData Model.Entity.Entity )
+    | UpdateSortType Model.DiscoveryEntity.SortType
+    | UpdateDropdownShown

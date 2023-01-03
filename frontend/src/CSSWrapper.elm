@@ -223,3 +223,15 @@ border_c_red = "border_c_red"
 p_10px : String
 p_10px = "p-10px"
 
+
+sort_option : String
+sort_option = "sort-option"
+
+
+text_c_red : String
+text_c_red = "text-c-red"
+
+
+dropdown_content : String
+dropdown_content = "dropdown-content"
+

@@ -57,6 +57,21 @@ update msg model =
             , Cmd.none
             )
 
+        Model.UpdateSortType sortType ->
+            ( updateDropdownShown { model | sortType = sortType }
+            , Cmd.none
+            )
+
+        Model.UpdateDropdownShown ->
+            ( updateDropdownShown model
+            , Cmd.none
+            )
+
+
+updateDropdownShown : Model.Model -> Model.Model
+updateDropdownShown model =
+    { model | dropdownShown = not model.dropdownShown }
+
 
 -- HTTP
 

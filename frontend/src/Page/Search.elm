@@ -56,9 +56,10 @@ results model resp =
                 , S.border_c_grey
                 , S.border_solid
                 ] ]
-            [ span [] [ text ( ( String.fromInt resp.searchCount ) ++ " resultaten voor " ++ model.query ) ]
+            [ span [] [ text ( ( String.fromInt resp.searchCount ) ++ " resultaten voor \"" ++ model.query ++ "\"" ) ]
+            , div [ S.class [ S.float_right ] ] [ sortDropdown model ]
             ] --result info
-        , div [] ( List.map result ( List.sortBy .searchScore resp.value ) ) -- results
+        , div [] ( List.map result ( Model.DiscoveryEntity.sort resp.value model.sortType) ) -- results
         ]
 
 
@@ -84,6 +85,46 @@ result discoveryEntity =
                     , S.py_3
                     ] ] [ text ( Date.toIsoString ( Date.fromPosix Time.utc ( Time.millisToPosix discoveryEntity.updateTime ) ) ) ] -- date
             ] ]
+
+
+sortDropdown : Model.Model -> Html Model.Msg
+sortDropdown model =
+    div []
+        [ span [ S.class [ S.inline_block ] ] [ text "Sorteren op " ]
+        , div [ S.class [ S.inline_block ] ]
+            [ div [  onClick Model.UpdateDropdownShown, S.class [ S.inline_block ] ]
+                [ sortSelectedText model.sortType
+                , span [ S.class [ S.sort_option, S.text_c_red ] ] [ text ( if model.dropdownShown then "^  " else "v  " ) ]
+                ]
+            , div [ S.class [ dropdownShown model.dropdownShown, S.dropdown_content ] ]
+                [ div [ onClick ( Model.UpdateSortType Model.DiscoveryEntity.Relevance ) ] [ sortSelectedText Model.DiscoveryEntity.Relevance ]
+                , div [ onClick ( Model.UpdateSortType Model.DiscoveryEntity.Name ) ] [ sortSelectedText Model.DiscoveryEntity.Name ]
+                , div [ onClick ( Model.UpdateSortType Model.DiscoveryEntity.DateAsc ) ] [ sortSelectedText Model.DiscoveryEntity.DateAsc ]
+                , div [ onClick ( Model.UpdateSortType Model.DiscoveryEntity.DateDesc ) ] [ sortSelectedText Model.DiscoveryEntity.DateDesc ]
+                ]
+            ]
+        ]
+
+
+dropdownShown : Bool -> String
+dropdownShown shown =
+    if shown then "" else S.hidden
+
+
+sortSelectedText : Model.DiscoveryEntity.SortType -> Html Model.Msg
+sortSelectedText sortType =
+    case sortType of
+        Model.DiscoveryEntity.Relevance ->
+            span [ S.class [ S.sort_option, S.text_c_red ] ] [ text "  Relevantie  " ]
+
+        Model.DiscoveryEntity.Name ->
+            span [ S.class [ S.sort_option, S.text_c_red ] ] [ text "  Naam  " ]
+
+        Model.DiscoveryEntity.DateAsc ->
+            span [ S.class [ S.sort_option, S.text_c_red ] ] [ text "  Datum ↑  " ]
+
+        Model.DiscoveryEntity.DateDesc ->
+            span [ S.class [ S.sort_option, S.text_c_red ] ] [ text "  Datum ↓  " ]
 
 
 smallSearchBar : Model.Model -> Html Model.Msg

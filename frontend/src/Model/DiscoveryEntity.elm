@@ -16,6 +16,52 @@ type alias DiscoveryEntities =
     List DiscoveryEntity
 
 
+type SortType
+    = Relevance
+    | Name
+    | DateAsc
+    | DateDesc
+
+
+-- SORT
+
+
+sort : DiscoveryEntities -> SortType -> DiscoveryEntities
+sort discoveryEntities sortType =
+    case sortType of
+        Relevance ->
+            sortByRelevance discoveryEntities
+
+        Name ->
+            sortByName discoveryEntities
+
+        DateAsc ->
+            sortByDateAsc discoveryEntities
+
+        DateDesc ->
+            sortByDateDesc discoveryEntities
+
+
+sortByRelevance : DiscoveryEntities -> DiscoveryEntities
+sortByRelevance discoveryEntities =
+    List.sortBy .searchScore discoveryEntities
+
+
+sortByName : DiscoveryEntities -> DiscoveryEntities
+sortByName discoveryEntities =
+    List.sortBy .name discoveryEntities
+
+
+sortByDateAsc : DiscoveryEntities -> DiscoveryEntities
+sortByDateAsc discoveryEntities =
+    List.sortBy .updateTime discoveryEntities
+
+
+sortByDateDesc : DiscoveryEntities -> DiscoveryEntities
+sortByDateDesc discoveryEntities =
+    List.reverse ( sortByDateAsc discoveryEntities )
+
+
 -- DECODERS
 
 

@@ -7,6 +7,7 @@ import Model
 import View
 import Update
 import RemoteData
+import Model.DiscoveryEntity
 
 
 -- MAIN
@@ -34,6 +35,8 @@ init _ url key =
       , url = url
       , queryResp = RemoteData.NotAsked
       , currentEntity = RemoteData.NotAsked
+      , sortType = Model.DiscoveryEntity.Relevance
+      , dropdownShown = False
       }
     , Cmd.none
     )
