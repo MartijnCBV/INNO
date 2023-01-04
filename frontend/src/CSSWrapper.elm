@@ -235,3 +235,15 @@ text_c_red = "text-c-red"
 dropdown_content : String
 dropdown_content = "dropdown-content"
 
+
+col_span_3 : String
+col_span_3 = "col-span-3"
+
+
+mt_6 : String
+mt_6 = "mt-6"
+
+
+mb_4 : String
+mb_4 = "mb-4"
+
