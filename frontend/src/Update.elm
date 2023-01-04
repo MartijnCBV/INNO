@@ -8,6 +8,7 @@ import Http
 import RemoteData
 import ServiceVars
 import Model.QueryResp
+import Model.Entity
 
 
 -- UPDATE
@@ -80,7 +81,7 @@ getQueryResp : Model.Query -> Cmd Model.Msg
 getQueryResp query =
     Http.get
         { url = ServiceVars.discoveryEP ++ "?query=" ++ query
-        , expect = Http.expectJson ( RemoteData.fromResult >> Model.QueryRespReceived ) Model.QueryResp.queryRespDecoder
+        , expect = Http.expectJson ( RemoteData.fromResult >> Model.QueryRespReceived ) Model.QueryResp.discoveryQueryRespDecoder
         }
 
 
@@ -88,6 +89,6 @@ getCurrentEntity : Model.Query -> Cmd Model.Msg
 getCurrentEntity query =
     Http.get
         { url = ServiceVars.entityEP ++ "?query=" ++ query
-        , expect = Http.expectString ( RemoteData.fromResult >> Model.CurrentEntityReceived )
+        , expect = Http.expectJson ( RemoteData.fromResult >> Model.CurrentEntityReceived ) Model.QueryResp.entityQueryRespDecoder
         }
 

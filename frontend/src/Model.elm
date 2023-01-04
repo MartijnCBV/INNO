@@ -18,7 +18,7 @@ type alias Model =
     { query : Query
     , key : Browser.Navigation.Key
     , url : Url.Url
-    , queryResp : RemoteData.WebData Model.QueryResp.QueryResp
+    , queryResp : RemoteData.WebData Model.QueryResp.DiscoveryQueryResp
     , currentEntity : RemoteData.WebData Model.Entity.Entity
     , sortType : Model.DiscoveryEntity.SortType
     , dropdownShown : Bool
@@ -40,7 +40,7 @@ type Msg
     | UrlChanged Url.Url
     | UpdateQuery Query
     | QueryQuery Query
-    | QueryRespReceived ( RemoteData.WebData Model.QueryResp.QueryResp )
+    | QueryRespReceived ( RemoteData.WebData Model.QueryResp.DiscoveryQueryResp )
     | QueryEntity Query
     | CurrentEntityReceived ( RemoteData.WebData Model.Entity.Entity )
     | UpdateSortType Model.DiscoveryEntity.SortType

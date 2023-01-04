@@ -48,7 +48,7 @@ viewResults model =
         RemoteData.Success resp -> results model resp
 
 
-results : Model.Model -> Model.QueryResp.QueryResp -> Html Model.Msg
+results : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html Model.Msg
 results model resp =
     div []
         [ div [ S.class
