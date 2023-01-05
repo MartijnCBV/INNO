@@ -254,3 +254,19 @@ m_auto = "m-auto"
 
 type_icon : String
 type_icon = "type-icon"
+
+
+r_corners : String
+r_corners = "r-corners"
+
+
+col_span_5 : String
+col_span_5 = "col-span-5"
+
+
+text_c_blue : String
+text_c_blue = "text-c-blue"
+
+
+my_6 : String
+my_6 = "my-6"
