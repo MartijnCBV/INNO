@@ -247,3 +247,10 @@ mt_6 = "mt-6"
 mb_4 : String
 mb_4 = "mb-4"
 
+
+m_auto : String
+m_auto = "m-auto"
+
+
+type_icon : String
+type_icon = "type-icon"

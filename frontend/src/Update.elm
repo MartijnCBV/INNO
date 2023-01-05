@@ -9,6 +9,7 @@ import RemoteData
 import ServiceVars
 import Model.QueryResp
 import Model.Entity
+import Model.DiscoveryEntity
 
 
 -- UPDATE
@@ -48,9 +49,9 @@ update msg model =
             , Cmd.none
             )
 
-        Model.QueryEntity query ->
-            ( { model | currentEntity = RemoteData.NotAsked }
-            , getCurrentEntity query
+        Model.QueryEntity discoveryEntity ->
+            ( updateCurrentDiscoveryEntity discoveryEntity { model | currentEntity = RemoteData.NotAsked }
+            , getCurrentEntity discoveryEntity.guid
             )
 
         Model.CurrentEntityReceived res ->
@@ -67,6 +68,11 @@ update msg model =
             ( updateDropdownShown model
             , Cmd.none
             )
+
+
+updateCurrentDiscoveryEntity : Model.DiscoveryEntity.DiscoveryEntity -> Model.Model -> Model.Model
+updateCurrentDiscoveryEntity discoveryEntity model =
+    { model | currentDiscoveryEntity = discoveryEntity }
 
 
 updateDropdownShown : Model.Model -> Model.Model

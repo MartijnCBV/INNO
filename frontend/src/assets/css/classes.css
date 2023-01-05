@@ -280,3 +280,12 @@
 .mb-4 {
     margin-bottom: 1rem;
 }
+
+.m-auto {
+    margin: auto;
+}
+
+.type-icon {
+    width: 65px;
+    height: auto;
+}

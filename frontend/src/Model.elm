@@ -22,6 +22,7 @@ type alias Model =
     , currentEntity : RemoteData.WebData Model.Entity.Entity
     , sortType : Model.DiscoveryEntity.SortType
     , dropdownShown : Bool
+    , currentDiscoveryEntity : Model.DiscoveryEntity.DiscoveryEntity
     }
 
 
@@ -41,7 +42,7 @@ type Msg
     | UpdateQuery Query
     | QueryQuery Query
     | QueryRespReceived ( RemoteData.WebData Model.QueryResp.DiscoveryQueryResp )
-    | QueryEntity Query
+    | QueryEntity Model.DiscoveryEntity.DiscoveryEntity
     | CurrentEntityReceived ( RemoteData.WebData Model.Entity.Entity )
     | UpdateSortType Model.DiscoveryEntity.SortType
     | UpdateDropdownShown

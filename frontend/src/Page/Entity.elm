@@ -38,7 +38,7 @@ viewGeneralInformation : Model.Model -> Model.Entity.Entity -> Html Model.Msg
 viewGeneralInformation model entity =
     div [ S.class [ S.col_span_3 ] ]
         [ div [ S.class [ S.grid, S.grid_cols_5 ] ]
-            [ div [ S.class [ S.mb_3 ] ] [ img [ Asset.imageSrc Asset.fileIcon ] [] ] --ICON
+            [ div [ S.class [ S.mb_3 ] ] [ img [ Asset.getTypeIcon model.currentDiscoveryEntity.objectType ] [] ] --ICON
             , h1 [ S.class
                 [ S.text_2xl
                 , S.col_span_4

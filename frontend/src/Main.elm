@@ -37,9 +37,20 @@ init _ url key =
       , currentEntity = RemoteData.NotAsked
       , sortType = Model.DiscoveryEntity.Relevance
       , dropdownShown = False
+      , currentDiscoveryEntity = initDiscoveryEntity
       }
     , Cmd.none
     )
+
+
+initDiscoveryEntity : Model.DiscoveryEntity.DiscoveryEntity
+initDiscoveryEntity =
+    { objectType = ""
+    , updateTime = 0
+    , name = ""
+    , searchScore = 0
+    ,guid = ""
+    }
 
 
 -- SUBSCRIPTIONS

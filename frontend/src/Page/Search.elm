@@ -1,6 +1,5 @@
 module Page.Search exposing (..)
 
-import Debug
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -16,6 +15,7 @@ import Route
 import RemoteData
 import CSSWrapper as S
 import Model.Error
+import Asset
 
 
 -- VIEW
@@ -73,9 +73,9 @@ result discoveryEntity =
                 , S.grid_cols_5
                 ]
             , id discoveryEntity.guid
-            , onClick ( Model.QueryEntity discoveryEntity.guid )
+            , onClick ( Model.QueryEntity discoveryEntity )
             ]
-            [ div [] [ text discoveryEntity.objectType ] -- type
+            [ div [] [ img [ Asset.getTypeIcon discoveryEntity.objectType, S.class [ S.m_auto, S.type_icon ] ] [] ] -- type
             , span [ S.class
                     [ S.col_span_4
                     , S.text_2xl

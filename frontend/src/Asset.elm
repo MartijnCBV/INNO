@@ -18,6 +18,16 @@ image filename =
     ("../src/assets/images/" ++ filename)
 
 
+getTypeIcon : String -> Html.Attribute msg
+getTypeIcon name =
+    case name of
+        "Folders" -> imageSrc folderIcon
+
+        "Tables" -> imageSrc databaseIcon
+
+        _ -> imageSrc fileIcon
+
+
 bgBuilding : Image
 bgBuilding =
     image "bg-building.svg"
@@ -41,3 +51,8 @@ fileIcon =
 infographicIcon : Image
 infographicIcon =
     image "infographic_icon.svg"
+
+
+folderIcon : Image
+folderIcon =
+    image "folder_icon.svg"
