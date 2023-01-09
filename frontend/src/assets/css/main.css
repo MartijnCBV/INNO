@@ -71,3 +71,7 @@ a {
     color: inherit;
     text-decoration: inherit;
 }
+
+button {
+    background-color: white;
+}

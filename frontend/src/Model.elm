@@ -23,6 +23,9 @@ type alias Model =
     , sortType : Model.DiscoveryEntity.SortType
     , dropdownShown : Bool
     , currentDiscoveryEntity : Model.DiscoveryEntity.DiscoveryEntity
+    , objectTypeFilterShown : Bool
+    , glossaryTermFilterShown : Bool
+    , objectTypesNotShown : List String
     }
 
 
@@ -46,3 +49,8 @@ type Msg
     | CurrentEntityReceived ( RemoteData.WebData Model.Entity.Entity )
     | UpdateSortType Model.DiscoveryEntity.SortType
     | UpdateDropdownShown
+    | UpdateObjectTypeFilterShown
+    | UpdateGlossaryTermFilterShown
+    | UpdateObjectTypesNotShown ( List String )
+    | AddObjectTypeNotShown String
+    | RemoveObjectTypeNotShown String

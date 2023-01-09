@@ -306,3 +306,39 @@
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
 }
+
+.pr-7 {
+    padding-right: 1.75rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.pb-3 {
+    padding-bottom: 0.75rem;
+}
+
+.w-175px {
+    width: 175px;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.p-2px {
+    padding: 2px;
+}
+
+.pl-3 {
+    padding-left: 0.75rem;
+}
+
+.accent-c-red {
+    accent-color: #E5352C;
+}

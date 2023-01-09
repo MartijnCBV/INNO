@@ -8,7 +8,7 @@ import Http
 import RemoteData
 import ServiceVars
 import Model.QueryResp
-import Model.Entity
+import List.Extra
 import Model.DiscoveryEntity
 
 
@@ -45,7 +45,7 @@ update msg model =
             )
 
         Model.QueryRespReceived res ->
-            ( { model | queryResp = res }
+            ( resetObjectTypesNotShown { model | queryResp = res }
             , Cmd.none
             )
 
@@ -69,6 +69,31 @@ update msg model =
             , Cmd.none
             )
 
+        Model.UpdateObjectTypeFilterShown ->
+            ( { model | objectTypeFilterShown = not model.objectTypeFilterShown }
+            , Cmd.none
+            )
+
+        Model.UpdateGlossaryTermFilterShown ->
+            ( { model | glossaryTermFilterShown = not model.glossaryTermFilterShown }
+            , Cmd.none
+            )
+
+        Model.UpdateObjectTypesNotShown strings ->
+            ( { model | objectTypesNotShown = strings }
+            , Cmd.none
+            )
+
+        Model.AddObjectTypeNotShown string ->
+            ( { model | objectTypesNotShown = ( List.Extra.unique ( string :: model.objectTypesNotShown ) ) }
+            , Cmd.none
+            )
+
+        Model.RemoveObjectTypeNotShown string ->
+            ( { model | objectTypesNotShown = ( List.filter ( \x -> x /= string ) model.objectTypesNotShown ) }
+            , Cmd.none
+            )
+
 
 updateCurrentDiscoveryEntity : Model.DiscoveryEntity.DiscoveryEntity -> Model.Model -> Model.Model
 updateCurrentDiscoveryEntity discoveryEntity model =
@@ -78,6 +103,11 @@ updateCurrentDiscoveryEntity discoveryEntity model =
 updateDropdownShown : Model.Model -> Model.Model
 updateDropdownShown model =
     { model | dropdownShown = not model.dropdownShown }
+
+
+resetObjectTypesNotShown : Model.Model -> Model.Model
+resetObjectTypesNotShown model =
+    { model | objectTypesNotShown = [] }
 
 
 -- HTTP

@@ -1,6 +1,7 @@
 module Model.DiscoveryEntity exposing (..)
 
 import Json.Decode
+import List.Extra
 
 
 type alias DiscoveryEntity =
@@ -60,6 +61,39 @@ sortByDateAsc discoveryEntities =
 sortByDateDesc : DiscoveryEntities -> DiscoveryEntities
 sortByDateDesc discoveryEntities =
     List.reverse ( sortByDateAsc discoveryEntities )
+
+
+-- FILTER
+
+
+isObjectType : String -> DiscoveryEntity -> Bool
+isObjectType s e =
+    s /= e.objectType
+
+
+isObjectTypeIn : List String -> DiscoveryEntity -> Bool
+isObjectTypeIn s e =
+    not ( List.member e.objectType s )
+
+
+getObjectTypes : DiscoveryEntities -> List String
+getObjectTypes e =
+    List.Extra.unique ( List.map .objectType e )
+
+
+removeObjectType : String -> DiscoveryEntities -> DiscoveryEntities
+removeObjectType s e =
+    List.filter ( isObjectType s ) e
+
+
+removeObjectTypes : List String -> DiscoveryEntities -> DiscoveryEntities
+removeObjectTypes s e =
+    List.filter ( isObjectTypeIn s ) e
+
+
+removeGlossaryItems : DiscoveryEntities -> DiscoveryEntities
+removeGlossaryItems e =
+    removeObjectType "Glossary terms" e
 
 
 -- DECODERS

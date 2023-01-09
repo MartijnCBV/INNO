@@ -48,7 +48,7 @@ attributesDecoder =
         ( Json.Decode.field "owner" nullableStringDecoder )
         ( Json.Decode.field "isFile" Json.Decode.bool )
         ( Json.Decode.field "qualifiedName" Json.Decode.string )
-        ( Json.Decode.field "description" nullableStringDecoder )
+        ( Json.Decode.field "userDescription" nullableStringDecoder )
         ( Json.Decode.field "name" Json.Decode.string )
         ( Json.Decode.field "contentType" nullableStringDecoder )
 

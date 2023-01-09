@@ -10,7 +10,8 @@ import Asset
 import Date
 import Time
 import String
-
+import Html.Parser
+import Html.Parser.Util
 import Model
 
 view : Model.Model -> Html Model.Msg
@@ -60,7 +61,7 @@ viewGeneralInformation model entity =
             ]
         , div [ S.class [ S.mb_4 ] ] --DESC
             [ h1 [ S.class [ S.text_xl ] ] [ text "Omschrijving:" ]
-            , p [] [ text ( viewEntityDescription entity.attributes.description ) ]
+            , p [] ( textHtml ( viewEntityDescription entity.attributes.description ) )
             ]
         ]
 
@@ -95,5 +96,15 @@ viewTime time =
 
 viewEntityDescription : String -> String
 viewEntityDescription description =
-    if description == " " then "Er is geen omschrijving beschikbaar" else description
+    if description == " " then "<div>Er is geen omschrijving beschikbaar<div>" else description
+
+
+textHtml : String -> List (Html msg)
+textHtml t =
+    case Html.Parser.run t of
+        Ok nodes ->
+            Html.Parser.Util.toVirtualDom nodes
+
+        Err _ ->
+            []
 

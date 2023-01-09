@@ -1,7 +1,7 @@
 module Page.Search exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html.Attributes
 import Html.Events exposing (..)
 import String
 import List
@@ -30,7 +30,7 @@ view model =
             , S.grid_cols_7
             , S.mw
             ] ]
-            [ div [ S.class [ S.col_span_2 ] ] [ filterBar model ]
+            [ div [ S.class [ S.col_span_2, S.ml_7, S.pr_7, S.flex, S.flex_col ] ] [ viewFilterBar model ]
             , div [ S.class [ S.col_span_4 ] ] [ viewResults model ]
             ]
         ]
@@ -48,6 +48,18 @@ viewResults model =
         RemoteData.Success resp -> results model resp
 
 
+viewFilterBar : Model.Model -> Html Model.Msg
+viewFilterBar model =
+        case model.queryResp of
+            RemoteData.NotAsked -> text "Initialising."
+
+            RemoteData.Loading -> text "Loading."
+
+            RemoteData.Failure err -> text ( "Error: " ++ Model.Error.errorToString err )
+
+            RemoteData.Success resp -> filterBar model resp
+
+
 results : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html Model.Msg
 results model resp =
     div []
@@ -59,7 +71,11 @@ results model resp =
             [ span [] [ text ( ( String.fromInt resp.searchCount ) ++ " resultaten voor \"" ++ model.query ++ "\"" ) ]
             , div [ S.class [ S.float_right ] ] [ sortDropdown model ]
             ] --result info
-        , div [] ( List.map result ( Model.DiscoveryEntity.sort resp.value model.sortType) ) -- results
+        , div []
+            ( List.map result
+                ( Model.DiscoveryEntity.sort
+                    ( Model.DiscoveryEntity.removeObjectTypes model.objectTypesNotShown
+                        ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) model.sortType) ) -- results
         ]
 
 
@@ -72,7 +88,7 @@ result discoveryEntity =
                 , S.grid
                 , S.grid_cols_5
                 ]
-            , id discoveryEntity.guid
+            , Html.Attributes.id discoveryEntity.guid
             , onClick ( Model.QueryEntity discoveryEntity )
             ]
             [ div [] [ img [ Asset.getTypeIcon discoveryEntity.objectType, S.class [ S.m_auto, S.type_icon ] ] [] ] -- type
@@ -164,7 +180,7 @@ smallSearchBar model =
                     , S.col_span_4
                     ]
                 ]
-                [ label [ for "searchbar", S.class [ S.hidden ] ] [ text "Zoek in data" ]
+                [ label [ Html.Attributes.for "searchbar", S.class [ S.hidden ] ] [ text "Zoek in data" ]
                 , div
                     [ S.class
                         [ S.w_full
@@ -183,14 +199,14 @@ smallSearchBar model =
                         , S.focus_border_transparent
                         , S.float_left
                         ]
-                    , id "searchbar"
-                    , type_ "text"
-                    , placeholder "Zoek in data"
-                    , value model.query
+                    , Html.Attributes.id "searchbar"
+                    , Html.Attributes.type_ "text"
+                    , Html.Attributes.placeholder "Zoek in data"
+                    , Html.Attributes.value model.query
                     , onInput Model.UpdateQuery
                     ] []
                     , button
-                        [ type_ "button"
+                        [ Html.Attributes.type_ "button"
                         , S.class
                             [ S.bg_c_red
                             , S.float_right
@@ -210,6 +226,72 @@ smallSearchBar model =
         ] ]
 
 
-filterBar : Model.Model -> Html Model.Msg
-filterBar model =
-    div [] []
+filterBar : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html Model.Msg
+filterBar model resp =
+    div []
+        [ div [ S.class [ S.pb_3 ] ]
+            [ filterBarObjectTypeButton model
+            , filterBarObjectTypeForm model resp
+            ] -- object types
+        , div [] [] -- glossary
+        ]
+
+
+filter : Model.Model -> String -> Html Model.Msg
+filter model s =
+    div []
+        [ input
+            [ Html.Attributes.type_ "checkbox"
+            , Html.Attributes.name s
+            , Html.Attributes.id s
+            , Html.Attributes.value s
+            , S.class [ S.accent_c_red ]
+            , onCheck ( onFilterCheck s)
+            , Html.Attributes.checked ( not ( List.member s model.objectTypesNotShown ) )
+            ] []
+        , label [ Html.Attributes.for s, S.class [ S.pl_3 ] ] [ text s ]
+        ]
+
+
+onFilterCheck : String -> Bool -> Model.Msg
+onFilterCheck s e =
+    if not e then
+        Model.AddObjectTypeNotShown s
+    else
+        Model.RemoveObjectTypeNotShown s
+
+
+filterBarObjectTypeButton : Model.Model -> Html Model.Msg
+filterBarObjectTypeButton model =
+    if model.objectTypeFilterShown then
+        button
+            [ Html.Attributes.type_ "button"
+            , S.class [ S.border_b, S.border_c_grey, S.w_175px, S.text_justify ]
+            , onClick Model.UpdateObjectTypeFilterShown
+            ]
+            [ i [ S.class [ S.material_icons, S.text_c_red, S.filter_icon, S.p_2px, S.bg_c_grey ] ] [ text "remove" ]
+            , span [ S.class [ S.pl_3, S.text_xl ] ] [ text "Type" ]
+            ]
+    else
+        button
+            [ Html.Attributes.type_ "button"
+            , S.class [ S.border_b, S.border_c_grey, S.w_175px, S.text_justify ]
+            , onClick Model.UpdateObjectTypeFilterShown
+            ]
+            [ i [ S.class [ S.material_icons, S.text_white, S.filter_icon, S.p_2px, S.bg_c_red ] ] [ text "add" ]
+            , span [ S.class [ S.pl_3, S.text_xl ] ] [ text "Type" ]
+            ]
+
+
+filterBarObjectTypeForm : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html Model.Msg
+filterBarObjectTypeForm model resp =
+    if model.objectTypeFilterShown then
+        form []
+            ( List.map ( filter model )
+            ( Model.DiscoveryEntity.getObjectTypes
+            ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) )
+    else
+        form [ S.class [ S.hidden ] ]
+            ( List.map ( filter model )
+            ( Model.DiscoveryEntity.getObjectTypes
+            ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) )

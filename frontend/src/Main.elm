@@ -38,6 +38,9 @@ init _ url key =
       , sortType = Model.DiscoveryEntity.Relevance
       , dropdownShown = False
       , currentDiscoveryEntity = initDiscoveryEntity
+      , objectTypeFilterShown = True
+      , glossaryTermFilterShown = True
+      , objectTypesNotShown = []
       }
     , Cmd.none
     )

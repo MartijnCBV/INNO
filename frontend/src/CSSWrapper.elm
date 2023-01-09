@@ -270,3 +270,39 @@ text_c_blue = "text-c-blue"
 
 my_6 : String
 my_6 = "my-6"
+
+
+pr_7 : String
+pr_7 = "pr-7"
+
+
+flex : String
+flex = "flex"
+
+
+flex_col : String
+flex_col = "flex-col"
+
+
+pb_3 : String
+pb_3 = "pb-3"
+
+
+w_175px : String
+w_175px = "w-175pc"
+
+
+text_justify : String
+text_justify = "text-justify"
+
+
+p_2px : String
+p_2px = "p-2px"
+
+
+pl_3 : String
+pl_3 = "pl-3"
+
+
+accent_c_red : String
+accent_c_red = "accent-c-red"
