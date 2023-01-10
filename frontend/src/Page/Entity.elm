@@ -7,11 +7,8 @@ import Model.Entity
 import RemoteData
 import Css
 import Asset
-import Date
-import Time
 import String
-import Html.Parser
-import Html.Parser.Util
+import Html.Util
 import Model
 
 view : Model.Model -> Html.Html Model.Msg
@@ -36,49 +33,43 @@ viewEntityInformation model entity =
     Html.div [ Css.class [ Css.mw, Css.grid, Css.grid_cols_5, Css.px_7 ] ]
         [ viewGeneralInformation model entity
         , viewAttributeInformation model entity
-        , Html.div [ Css.class [ Css.bg_c_grey, Css.r_corners, Css.col_span_5, Css.mt_6 ] ]
-            [ Html.div [ Css.class [ Css.mx_7 ] ] [ viewColumns model entity ]
-            ]
-        , Html.div [ Css.class [ Css.bg_c_grey, Css.r_corners, Css.col_span_5, Css.mt_6 ] ]
-            [ Html.div [ Css.class [ Css.mx_7 ] ]
-                [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Locatie: " ]
-                , Html.a [ Html.Attributes.href entity.attributes.qualifiedName, Css.class [ Css.text_c_blue ] ] [ Html.text entity.attributes.qualifiedName ]
-                ]
-            ]
+        , viewColumnInformation model entity
+        , viewQualifiedName entity
         ]
 
 
 viewGeneralInformation : Model.Model -> Model.Entity.Entity -> Html.Html Model.Msg
 viewGeneralInformation model entity =
     Html.div [ Css.class [ Css.col_span_3 ] ]
-        [ Html.div [ Css.class [ Css.grid, Css.grid_cols_5 ] ]
-            [ Html.div [ Css.class [ Css.mb_3 ] ] [ Html.img [ Asset.getTypeIcon model.currentDiscoveryEntity.objectType ] [] ] --ICON
-            , Html.h1 [ Css.class
-                [ Css.text_2xl
-                , Css.col_span_4
-                , Css.mt_6
-                ] ] [ Html.text entity.attributes.name ] --TITLE
-            ]
-        , Html.div [ Css.class [ Css.mb_4 ] ] --DESC
-            [ Html.h1 [ Css.class [ Css.text_xl ] ] [ Html.text "Omschrijving:" ]
-            , Html.p [] ( textHtml ( viewEntityDescription entity.attributes.description ) )
-            ]
+        [ viewTitle model entity
+        , viewDescription entity
         ]
 
 
-viewAttributeInformation : Model.Model -> Model.Entity.Entity -> Html.Html Model.Msg
-viewAttributeInformation model entity =
-    Html.div [ Css.class [ Css.col_span_2, Css.bg_c_grey, Css.r_corners ] ] [ Html.div [ Css.class [ Css.ml_7, Css.my_6 ] ]
-        [ Html.h1 [ Css.class [ Css.text_xl ] ] [ Html.text "Kenmerken:" ]
-        , Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "ID: " ], Html.span [] [ Html.text entity.guid ] ]
-        , Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Type: " ], Html.span [] [ Html.text model.currentDiscoveryEntity.objectType ] ]
-        , Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Bron: " ], Html.span [] [ Html.text entity.source ] ]
-        -- , div [] [ span [ Css.class [ Css.font_bold ] ] [ text "Eigenaar: " ], span [] [ text entity.attributes.owner ] ]
-        , Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Gemaakt door: " ], Html.span [] [ Html.text entity.createdBy ] ]
-        , Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Gemaakt op: " ], Html.span [] [ Html.text ( viewTime entity.createTime ) ] ]
-        , Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Geüpdate door: " ], Html.span [] [ Html.text entity.updatedBy ] ]
-        , Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Geüpdate op: " ], Html.span [] [ Html.text ( viewTime entity.updateTime ) ] ]
-        ] ] --REST
+viewTitle : Model.Model -> Model.Entity.Entity -> Html.Html Model.Msg
+viewTitle model entity =
+    Html.div [ Css.class [ Css.grid, Css.grid_cols_5 ] ]
+        [ Html.div [ Css.class [ Css.mb_3 ] ] [ Html.img [ Asset.getTypeIcon model.currentDiscoveryEntity.objectType ] [] ] --ICON
+        , Html.h1 [ Css.class [ Css.text_2xl, Css.col_span_4, Css.mt_6] ] [ Html.text entity.attributes.name ] --TITLE
+        ]
+
+
+viewDescription : Model.Entity.Entity -> Html.Html Model.Msg
+viewDescription entity =
+    Html.div [ Css.class [ Css.mb_4 ] ]
+        [ Html.h1 [ Css.class [ Css.text_xl ] ] [ Html.text "Omschrijving:" ]
+        , Html.p [] ( Html.Util.textToHtml ( viewEntityDescription entity.attributes.description ) )
+        ]
+
+
+viewQualifiedName : Model.Entity.Entity -> Html.Html Model.Msg
+viewQualifiedName entity =
+    Html.div [ Css.class [ Css.bg_c_grey, Css.r_corners, Css.col_span_5, Css.mt_6 ] ]
+        [ Html.div [ Css.class [ Css.mx_7 ] ]
+            [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Locatie: " ]
+            , Html.a [ Html.Attributes.href entity.attributes.qualifiedName, Css.class [ Css.text_c_blue ] ] [ Html.text entity.attributes.qualifiedName ]
+            ]
+        ]
 
 
 viewColumns : Model.Model -> Model.Entity.Entity -> Html.Html Model.Msg
@@ -89,9 +80,9 @@ viewColumns model entity =
         Html.div [] []
 
 
-viewTime : Int -> String
-viewTime time =
-    Date.toIsoString ( Date.fromPosix Time.utc ( Time.millisToPosix time ) )
+viewColumnInformation : Model.Model -> Model.Entity.Entity -> Html.Html Model.Msg
+viewColumnInformation model entity =
+    Html.div [ Css.class [ Css.bg_c_grey, Css.r_corners, Css.col_span_5, Css.mt_6 ] ] [ Html.div [ Css.class [ Css.mx_7 ] ] [ viewColumns model entity ] ]
 
 
 viewEntityDescription : String -> String
@@ -102,12 +93,46 @@ viewEntityDescription description =
         description
 
 
-textHtml : String -> List (Html.Html msg)
-textHtml t =
-    case Html.Parser.run t of
-        Ok nodes ->
-            Html.Parser.Util.toVirtualDom nodes
+viewAttributeInformation : Model.Model -> Model.Entity.Entity -> Html.Html Model.Msg
+viewAttributeInformation model entity =
+    Html.div [ Css.class [ Css.col_span_2, Css.bg_c_grey, Css.r_corners ] ] [ Html.div [ Css.class [ Css.ml_7, Css.my_6 ] ]
+        [ Html.h1 [ Css.class [ Css.text_xl ] ] [ Html.text "Kenmerken:" ]
+        , viewId entity
+        , viewType model
+        , viewSource entity
+        , viewMadeBy entity
+        , viewMadeOn entity
+        , viewUpdatedBy entity
+        , viewUpdatedOn entity
+        ] ] --REST
 
-        Err _ ->
-            []
+
+viewId : Model.Entity.Entity -> Html.Html Model.Msg
+viewId entity =
+    Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "ID: " ], Html.span [] [ Html.text entity.guid ] ]
+
+
+viewType : Model.Model -> Html.Html Model.Msg
+viewType model =
+    Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Type: " ], Html.span [] [ Html.text model.currentDiscoveryEntity.objectType ] ]
+
+viewSource : Model.Entity.Entity -> Html.Html Model.Msg
+viewSource entity =
+    Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Bron: " ], Html.span [] [ Html.text entity.source ] ]
+
+viewMadeBy : Model.Entity.Entity -> Html.Html Model.Msg
+viewMadeBy entity =
+    Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Gemaakt door: " ], Html.span [] [ Html.text entity.createdBy ] ]
+
+viewMadeOn : Model.Entity.Entity -> Html.Html Model.Msg
+viewMadeOn entity =
+    Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Gemaakt op: " ], Html.span [] [ Html.text ( Html.Util.timeToString entity.createTime ) ] ]
+
+viewUpdatedBy : Model.Entity.Entity -> Html.Html Model.Msg
+viewUpdatedBy entity =
+    Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Geüpdate door: " ], Html.span [] [ Html.text entity.updatedBy ] ]
+
+viewUpdatedOn : Model.Entity.Entity -> Html.Html Model.Msg
+viewUpdatedOn entity =
+    Html.div [] [ Html.span [ Css.class [ Css.font_bold ] ] [ Html.text "Geüpdate op: " ], Html.span [] [ Html.text ( Html.Util.timeToString entity.updateTime ) ] ]
 
