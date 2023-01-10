@@ -83,10 +83,8 @@ noIsFileAttributeDecoder =
 columnsDecoder : Json.Decode.Decoder ( List String )
 columnsDecoder =
     ( Json.Decode.field "relationshipAttributes"
-        ( Json.Decode.field "columns"
-            ( Json.Decode.list ( Json.Decode.field "displayText" Json.Decode.string ) )
-        )
-    )
+    ( Json.Decode.field "columns"
+    ( Json.Decode.list ( Json.Decode.field "displayText" Json.Decode.string ) ) ) )
 
 
 nullableColumnsDecoder : Json.Decode.Decoder ( List String )

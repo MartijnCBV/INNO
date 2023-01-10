@@ -130,6 +130,7 @@ getExtensions : DiscoveryEntities -> List String
 getExtensions e =
     List.filter isNotEmptyString ( List.Extra.unique ( List.map getExtension ( getFileObjects e ) ) )
 
+
 -- UNUSED
 {-
 removeExtension : String -> DiscoveryEntities -> DiscoveryEntities

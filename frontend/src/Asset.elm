@@ -28,9 +28,15 @@ getTypeIcon name =
         _ -> imageSrc fileIcon
 
 
+-- CONSTANTS
+
+
+-- UNUSED
+{-
 bgBuilding : Image
 bgBuilding =
     image "bg-building.svg"
+-}
 
 
 logo : Image
@@ -48,9 +54,12 @@ fileIcon =
     image "file_icon.svg"
 
 
+-- UNUSED
+{-
 infographicIcon : Image
 infographicIcon =
     image "infographic_icon.svg"
+-}
 
 
 folderIcon : Image

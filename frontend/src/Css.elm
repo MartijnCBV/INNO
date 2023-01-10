@@ -9,6 +9,9 @@ class classes =
     Html.Attributes.class ( String.join " " classes )
 
 
+-- CONSTANTS
+
+
 logo : String
 logo = "logo"
 

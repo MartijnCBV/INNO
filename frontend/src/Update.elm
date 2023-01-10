@@ -211,6 +211,9 @@ updateCurrentDiscoveryEntity discoveryEntity model =
     { model | currentDiscoveryEntity = discoveryEntity }
 
 
+-- UPDATE UTIL
+
+
 resetObjectTypesNotShown : Model.Model -> Model.Model
 resetObjectTypesNotShown model =
     { model | objectTypesNotShown = [] }
