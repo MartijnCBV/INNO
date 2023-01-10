@@ -17,7 +17,7 @@ view model =
     div [ S.class [ S.bg_image ] ]
         [ div [ S.class [ S.mw ] ]
             [ h1 [ S.class [ S.pt_10, S.mp_text ] ]
-                [ span [ S.class [ S.mp_span, S.p_7, S.mx_7 ] ] [ text "Zoek in data" ]
+                [ span [ S.class [ S.mp_span, S.p_7, S.mx_7 ] ] [ text "Zoek in datacatalogus" ]
                 ]
             , searchBar model
             ]
@@ -31,14 +31,14 @@ searchBar model =
         [ label
             [ for "searchbar"
             , type_ "text"
-            , placeholder "Zoek in data"
+            , placeholder "Zoek in datacatalogus"
             , S.class [ S.hidden ]
             ] []
         , div [ S.class [ S.wh_full_mw_fit ] ]
             [ input
                 [ id "searchbar"
                 , type_ "text"
-                , placeholder "Zoek in data"
+                , placeholder "Zoek in datacatalogus"
                 , value model.query
                 , onInput Model.UpdateQuery
                 , S.class [ S.mp_s, S.ml_7 ]
