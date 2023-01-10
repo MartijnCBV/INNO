@@ -104,7 +104,7 @@ result discoveryEntity =
             , span [ S.class
                     [ S.col_span_4
                     , S.py_3
-                    ] ] [ text ( Date.toIsoString ( Date.fromPosix Time.utc ( Time.millisToPosix discoveryEntity.updateTime ) ) ) ] -- date
+                    ] ] [ text ( "Laatst gewijzigd: " ++ ( Date.toIsoString ( Date.fromPosix Time.utc ( Time.millisToPosix discoveryEntity.updateTime ) ) ) ) ] -- date
             ] ]
 
 
