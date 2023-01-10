@@ -24,8 +24,10 @@ type alias Model =
     , dropdownShown : Bool
     , currentDiscoveryEntity : Model.DiscoveryEntity.DiscoveryEntity
     , objectTypeFilterShown : Bool
+    , extensionFilterShown : Bool
     , glossaryTermFilterShown : Bool
     , objectTypesNotShown : List String
+    , extensionsNotShown : List String
     }
 
 
@@ -50,7 +52,11 @@ type Msg
     | UpdateSortType Model.DiscoveryEntity.SortType
     | UpdateDropdownShown
     | UpdateObjectTypeFilterShown
+    | UpdateExtensionFilterShown
     | UpdateGlossaryTermFilterShown
     | UpdateObjectTypesNotShown ( List String )
     | AddObjectTypeNotShown String
     | RemoveObjectTypeNotShown String
+    | UpdateExtensionsNotShown ( List String )
+    | AddExtensionNotShown String
+    | RemoveExtensionNotShown String

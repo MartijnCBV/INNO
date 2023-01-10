@@ -66,9 +66,14 @@ sortByDateDesc discoveryEntities =
 -- FILTER
 
 
+isNotObjectType : String -> DiscoveryEntity -> Bool
+isNotObjectType s e =
+    s /= e.objectType
+
+
 isObjectType : String -> DiscoveryEntity -> Bool
 isObjectType s e =
-    s /= e.objectType
+    s == e.objectType
 
 
 isObjectTypeIn : List String -> DiscoveryEntity -> Bool
@@ -83,7 +88,7 @@ getObjectTypes e =
 
 removeObjectType : String -> DiscoveryEntities -> DiscoveryEntities
 removeObjectType s e =
-    List.filter ( isObjectType s ) e
+    List.filter ( isNotObjectType s ) e
 
 
 removeObjectTypes : List String -> DiscoveryEntities -> DiscoveryEntities
@@ -94,6 +99,41 @@ removeObjectTypes s e =
 removeGlossaryItems : DiscoveryEntities -> DiscoveryEntities
 removeGlossaryItems e =
     removeObjectType "Glossary terms" e
+
+
+getFileObjects : DiscoveryEntities -> DiscoveryEntities
+getFileObjects e =
+    List.filter ( isObjectType "Files" ) e
+
+
+getLastElem : List a -> Maybe a
+getLastElem a =
+    List.head ( List.reverse a )
+
+
+getExtension : DiscoveryEntity -> String
+getExtension e =
+    case getLastElem ( String.split "." e.name ) of
+        Just a ->
+            a
+
+        Nothing ->
+            ""
+
+
+getExtensions : DiscoveryEntities -> List String
+getExtensions e =
+    List.filter ( \s -> s /= "" ) ( List.Extra.unique ( List.map getExtension ( getFileObjects e ) ) )
+
+
+removeExtension : String -> DiscoveryEntities -> DiscoveryEntities
+removeExtension s e =
+    List.filter ( \a -> ( getExtension a ) /= s ) e
+
+
+removeExtensions : List String -> DiscoveryEntities -> DiscoveryEntities
+removeExtensions s e =
+    List.filter ( \a -> not ( List.member ( getExtension a ) s ) ) e
 
 
 -- DECODERS

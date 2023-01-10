@@ -72,15 +72,17 @@ results model resp =
                 ( List.length
                 ( List.map result
                 ( Model.DiscoveryEntity.sort
+                ( Model.DiscoveryEntity.removeExtensions model.extensionsNotShown
                 ( Model.DiscoveryEntity.removeObjectTypes model.objectTypesNotShown
-                ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) model.sortType) ) ) ++ " resultaten voor \"" ++ model.query ++ "\"" ) ]
+                ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) ) model.sortType) ) ) ++ " resultaten voor \"" ++ model.query ++ "\"" ) ]
             , div [ S.class [ S.float_right ] ] [ sortDropdown model ]
             ] --result info
         , div []
             ( List.map result
                 ( Model.DiscoveryEntity.sort
+                ( Model.DiscoveryEntity.removeExtensions model.extensionsNotShown
                 ( Model.DiscoveryEntity.removeObjectTypes model.objectTypesNotShown
-                ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) model.sortType) ) -- results
+                ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) ) model.sortType) ) -- results
         ]
 
 
@@ -238,12 +240,16 @@ filterBar model resp =
             [ filterBarObjectTypeButton model
             , filterBarObjectTypeForm model resp
             ] -- object types
+        , div [ S.class [ S.pb_3 ] ]
+            [ filterBarExtensionButton model
+            , filterBarExtensionForm model resp
+            ] -- extensions
         , div [] [] -- glossary
         ]
 
 
-filter : Model.Model -> String -> Html Model.Msg
-filter model s =
+filter : ( String -> Bool -> Model.Msg ) -> List String -> String -> Html Model.Msg
+filter f e s =
     div []
         [ input
             [ Html.Attributes.type_ "checkbox"
@@ -251,19 +257,27 @@ filter model s =
             , Html.Attributes.id s
             , Html.Attributes.value s
             , S.class [ S.accent_c_red ]
-            , onCheck ( onFilterCheck s)
-            , Html.Attributes.checked ( not ( List.member s model.objectTypesNotShown ) )
+            , onCheck ( f s)
+            , Html.Attributes.checked ( not ( List.member s e ) )
             ] []
         , label [ Html.Attributes.for s, S.class [ S.pl_3 ] ] [ text s ]
         ]
 
 
-onFilterCheck : String -> Bool -> Model.Msg
-onFilterCheck s e =
+onObjectTypeFilterCheck : String -> Bool -> Model.Msg
+onObjectTypeFilterCheck s e =
     if not e then
         Model.AddObjectTypeNotShown s
     else
         Model.RemoveObjectTypeNotShown s
+
+
+onExtensionFilterCheck : String -> Bool -> Model.Msg
+onExtensionFilterCheck s e =
+    if not e then
+        Model.AddExtensionNotShown s
+    else
+        Model.RemoveExtensionNotShown s
 
 
 filterBarObjectTypeButton : Model.Model -> Html Model.Msg
@@ -288,15 +302,51 @@ filterBarObjectTypeButton model =
             ]
 
 
+filterBarExtensionButton : Model.Model -> Html Model.Msg
+filterBarExtensionButton model =
+        if model.extensionFilterShown then
+            button
+                [ Html.Attributes.type_ "button"
+                , S.class [ S.border_b, S.border_c_grey, S.w_175px, S.text_justify ]
+                , onClick Model.UpdateExtensionFilterShown
+                ]
+                [ i [ S.class [ S.material_icons, S.text_c_red, S.filter_icon, S.p_2px, S.bg_c_grey ] ] [ text "remove" ]
+                , span [ S.class [ S.pl_3, S.text_xl ] ] [ text "Extensie" ]
+                ]
+        else
+            button
+                [ Html.Attributes.type_ "button"
+                , S.class [ S.border_b, S.border_c_grey, S.w_175px, S.text_justify ]
+                , onClick Model.UpdateExtensionFilterShown
+                ]
+                [ i [ S.class [ S.material_icons, S.text_white, S.filter_icon, S.p_2px, S.bg_c_red ] ] [ text "add" ]
+                , span [ S.class [ S.pl_3, S.text_xl ] ] [ text "Extensie" ]
+                ]
+
+
 filterBarObjectTypeForm : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html Model.Msg
 filterBarObjectTypeForm model resp =
     if model.objectTypeFilterShown then
         form []
-            ( List.map ( filter model )
+            ( List.map ( filter onObjectTypeFilterCheck model.objectTypesNotShown )
             ( Model.DiscoveryEntity.getObjectTypes
             ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) )
     else
         form [ S.class [ S.hidden ] ]
-            ( List.map ( filter model )
+            ( List.map ( filter onObjectTypeFilterCheck model.objectTypesNotShown )
             ( Model.DiscoveryEntity.getObjectTypes
             ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) )
+
+
+filterBarExtensionForm : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html Model.Msg
+filterBarExtensionForm model resp =
+        if model.extensionFilterShown then
+            form []
+                ( List.map ( filter onExtensionFilterCheck model.extensionsNotShown )
+                ( Model.DiscoveryEntity.getExtensions
+                ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) )
+        else
+            form [ S.class [ S.hidden ] ]
+                ( List.map ( filter onExtensionFilterCheck model.extensionsNotShown )
+                ( Model.DiscoveryEntity.getExtensions
+                ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) )

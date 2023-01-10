@@ -39,8 +39,10 @@ init _ url key =
       , dropdownShown = False
       , currentDiscoveryEntity = initDiscoveryEntity
       , objectTypeFilterShown = True
+      , extensionFilterShown = True
       , glossaryTermFilterShown = True
       , objectTypesNotShown = []
+      , extensionsNotShown = []
       }
     , Cmd.none
     )

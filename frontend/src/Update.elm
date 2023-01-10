@@ -10,6 +10,7 @@ import ServiceVars
 import Model.QueryResp
 import List.Extra
 import Model.DiscoveryEntity
+import Model.Entity
 
 
 -- UPDATE
@@ -19,80 +20,190 @@ update : Model.Msg -> Model.Model -> ( Model.Model, Cmd Model.Msg )
 update msg model =
     case msg of
         Model.UpdateQuery newQuery ->
-            ( { model | query = newQuery }
-            , Cmd.none
-            )
+            updateQuery model newQuery
 
         Model.LinkClicked urlRequest ->
-            case urlRequest of
-                Browser.Internal url ->
-                    ( model
-                    , Browser.Navigation.pushUrl model.key ( Url.toString url )
-                    )
-                Browser.External href ->
-                    ( model
-                    , Browser.Navigation.load href
-                    )
+            linkClicked model urlRequest
 
         Model.UrlChanged url ->
-            ( { model | url = url }
-            , Cmd.none
-            )
+            urlChanged model url
 
         Model.QueryQuery query ->
-            ( { model | queryResp = RemoteData.NotAsked }
-            , getQueryResp query
-            )
+            queryQuery model query
 
-        Model.QueryRespReceived res ->
-            ( resetObjectTypesNotShown { model | queryResp = res }
-            , Cmd.none
-            )
+        Model.QueryRespReceived resp ->
+            queryRespReceived model resp
 
         Model.QueryEntity discoveryEntity ->
-            ( updateCurrentDiscoveryEntity discoveryEntity { model | currentEntity = RemoteData.NotAsked }
-            , getCurrentEntity discoveryEntity.guid
-            )
+            queryEntity model discoveryEntity
 
-        Model.CurrentEntityReceived res ->
-            ( { model | currentEntity = res }
-            , Cmd.none
-            )
+        Model.CurrentEntityReceived resp ->
+            currentEntityReceived model resp
 
         Model.UpdateSortType sortType ->
-            ( updateDropdownShown { model | sortType = sortType }
-            , Cmd.none
-            )
+            updateSortType model sortType
 
         Model.UpdateDropdownShown ->
-            ( updateDropdownShown model
-            , Cmd.none
-            )
+            updateDropdownShown model
 
         Model.UpdateObjectTypeFilterShown ->
-            ( { model | objectTypeFilterShown = not model.objectTypeFilterShown }
-            , Cmd.none
-            )
+            updateObjectTypeFilterShown model
 
         Model.UpdateGlossaryTermFilterShown ->
-            ( { model | glossaryTermFilterShown = not model.glossaryTermFilterShown }
-            , Cmd.none
-            )
+            updateGlossaryTermFilterShown model
 
         Model.UpdateObjectTypesNotShown strings ->
-            ( { model | objectTypesNotShown = strings }
-            , Cmd.none
-            )
+            updateObjectTypesNotShown model strings
 
         Model.AddObjectTypeNotShown string ->
-            ( { model | objectTypesNotShown = ( List.Extra.unique ( string :: model.objectTypesNotShown ) ) }
-            , Cmd.none
-            )
+            addObjectTypeNotShown model string
 
         Model.RemoveObjectTypeNotShown string ->
-            ( { model | objectTypesNotShown = ( List.filter ( \x -> x /= string ) model.objectTypesNotShown ) }
-            , Cmd.none
+            removeObjectTypeNotShown model string
+
+        Model.UpdateExtensionFilterShown ->
+            updateExtensionFilterShown model
+
+        Model.UpdateExtensionsNotShown strings ->
+            updateExtensionsNotShown model strings
+
+        Model.AddExtensionNotShown string ->
+            addExtensionNotShown model string
+
+        Model.RemoveExtensionNotShown string ->
+            removeExtensionNotShown model string
+
+
+updateQuery : Model.Model -> String -> ( Model.Model, Cmd Model.Msg )
+updateQuery m e =
+    ( { m | query = e }
+    , Cmd.none
+    )
+
+
+linkClicked : Model.Model -> Browser.UrlRequest -> ( Model.Model, Cmd Model.Msg )
+linkClicked m e =
+    case e of
+        Browser.Internal url ->
+            ( m
+            , Browser.Navigation.pushUrl m.key ( Url.toString url )
             )
+        Browser.External href ->
+            ( m
+            , Browser.Navigation.load href
+            )
+
+
+urlChanged : Model.Model -> Url.Url -> ( Model.Model, Cmd Model.Msg )
+urlChanged m e =
+    ( { m | url = e }
+    , Cmd.none
+    )
+
+
+queryQuery : Model.Model -> String -> ( Model.Model, Cmd Model.Msg )
+queryQuery m e =
+    ( { m | queryResp = RemoteData.NotAsked }
+    , getQueryResp e
+    )
+
+
+queryRespReceived : Model.Model -> ( RemoteData.WebData Model.QueryResp.DiscoveryQueryResp ) -> ( Model.Model, Cmd Model.Msg )
+queryRespReceived m e =
+    ( resetExtensionsNotShown ( resetObjectTypesNotShown { m | queryResp = e } )
+    , Cmd.none
+    )
+
+
+queryEntity: Model.Model -> Model.DiscoveryEntity.DiscoveryEntity -> ( Model.Model, Cmd Model.Msg )
+queryEntity m e =
+    ( updateCurrentDiscoveryEntity e { m | currentEntity = RemoteData.NotAsked }
+    , getCurrentEntity e.guid
+    )
+
+
+currentEntityReceived : Model.Model -> ( RemoteData.WebData Model.Entity.Entity ) -> ( Model.Model, Cmd Model.Msg )
+currentEntityReceived m e =
+    ( { m | currentEntity = e }
+    , Cmd.none
+    )
+
+
+updateSortType : Model.Model -> Model.DiscoveryEntity.SortType -> ( Model.Model, Cmd Model.Msg )
+updateSortType m e =
+    ( Tuple.first ( updateDropdownShown { m | sortType = e } )
+    , Cmd.none
+    )
+
+
+updateDropdownShown : Model.Model -> ( Model.Model, Cmd Model.Msg )
+updateDropdownShown m =
+    ( { m | dropdownShown = not m.dropdownShown }
+    , Cmd.none
+    )
+
+
+updateObjectTypeFilterShown : Model.Model -> ( Model.Model, Cmd Model.Msg )
+updateObjectTypeFilterShown m =
+    ( { m | objectTypeFilterShown = not m.objectTypeFilterShown }
+    , Cmd.none
+    )
+
+
+updateExtensionFilterShown : Model.Model -> ( Model.Model, Cmd Model.Msg )
+updateExtensionFilterShown m =
+    ( { m | extensionFilterShown = not m.extensionFilterShown }
+    , Cmd.none
+    )
+
+
+updateGlossaryTermFilterShown : Model.Model -> ( Model.Model, Cmd Model.Msg )
+updateGlossaryTermFilterShown m =
+    ( { m | glossaryTermFilterShown = not m.glossaryTermFilterShown }
+    , Cmd.none
+    )
+
+
+updateObjectTypesNotShown : Model.Model -> ( List String ) -> ( Model.Model, Cmd Model.Msg )
+updateObjectTypesNotShown m e =
+    ( { m | objectTypesNotShown = e }
+    , Cmd.none
+    )
+
+
+addObjectTypeNotShown : Model.Model -> String -> ( Model.Model, Cmd Model.Msg )
+addObjectTypeNotShown m e =
+    ( { m | objectTypesNotShown = ( List.Extra.unique ( e :: m.objectTypesNotShown ) ) }
+    , Cmd.none
+    )
+
+
+removeObjectTypeNotShown : Model.Model -> String -> ( Model.Model, Cmd Model.Msg )
+removeObjectTypeNotShown m e =
+    ( { m | objectTypesNotShown = ( List.filter ( \x -> x /= e ) m.objectTypesNotShown ) }
+    , Cmd.none
+    )
+
+
+updateExtensionsNotShown : Model.Model -> ( List String ) -> ( Model.Model, Cmd Model.Msg )
+updateExtensionsNotShown m e =
+    ( { m | extensionsNotShown = e }
+    , Cmd.none
+    )
+
+
+addExtensionNotShown : Model.Model -> String -> ( Model.Model, Cmd Model.Msg )
+addExtensionNotShown m e =
+    ( { m | extensionsNotShown = ( List.Extra.unique ( e :: m.extensionsNotShown ) ) }
+    , Cmd.none
+    )
+
+
+removeExtensionNotShown : Model.Model -> String  -> ( Model.Model, Cmd Model.Msg )
+removeExtensionNotShown m e =
+    ( { m | extensionsNotShown = ( List.filter ( \x -> x /= e ) m.extensionsNotShown ) }
+    , Cmd.none
+    )
 
 
 updateCurrentDiscoveryEntity : Model.DiscoveryEntity.DiscoveryEntity -> Model.Model -> Model.Model
@@ -100,14 +211,14 @@ updateCurrentDiscoveryEntity discoveryEntity model =
     { model | currentDiscoveryEntity = discoveryEntity }
 
 
-updateDropdownShown : Model.Model -> Model.Model
-updateDropdownShown model =
-    { model | dropdownShown = not model.dropdownShown }
-
-
 resetObjectTypesNotShown : Model.Model -> Model.Model
 resetObjectTypesNotShown model =
     { model | objectTypesNotShown = [] }
+
+
+resetExtensionsNotShown : Model.Model -> Model.Model
+resetExtensionsNotShown model =
+    { model | extensionsNotShown = [] }
 
 
 -- HTTP
