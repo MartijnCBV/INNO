@@ -1,4 +1,4 @@
-module CSSWrapper exposing (..)
+module Css exposing (..)
 
 import Html
 import Html.Attributes

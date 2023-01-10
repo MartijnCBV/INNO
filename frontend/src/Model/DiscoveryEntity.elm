@@ -121,14 +121,21 @@ getExtension e =
             ""
 
 
+isNotEmptyString : String -> Bool
+isNotEmptyString s =
+    s /= ""
+
+
 getExtensions : DiscoveryEntities -> List String
 getExtensions e =
-    List.filter ( \s -> s /= "" ) ( List.Extra.unique ( List.map getExtension ( getFileObjects e ) ) )
+    List.filter isNotEmptyString ( List.Extra.unique ( List.map getExtension ( getFileObjects e ) ) )
 
-
+-- UNUSED
+{-
 removeExtension : String -> DiscoveryEntities -> DiscoveryEntities
 removeExtension s e =
     List.filter ( \a -> ( getExtension a ) /= s ) e
+-}
 
 
 removeExtensions : List String -> DiscoveryEntities -> DiscoveryEntities

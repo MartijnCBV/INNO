@@ -1,8 +1,8 @@
 module Page.Search exposing (..)
 
-import Html exposing (..)
+import Html
 import Html.Attributes
-import Html.Events exposing (..)
+import Html.Events
 import String
 import List
 import Date
@@ -13,7 +13,7 @@ import Model.QueryResp
 import Model.DiscoveryEntity
 import Route
 import RemoteData
-import CSSWrapper as S
+import Css
 import Model.Error
 import Asset
 
@@ -21,109 +21,93 @@ import Asset
 -- VIEW
 
 
-view : Model.Model -> Html Model.Msg
+view : Model.Model -> Html.Html Model.Msg
 view model =
-    div []
+    Html.div []
         [ smallSearchBar model
-        , div [ S.class
-            [ S.grid
-            , S.grid_cols_7
-            , S.mw
-            ] ]
-            [ div [ S.class [ S.col_span_2, S.ml_7, S.pr_7, S.flex, S.flex_col ] ] [ viewFilterBar model ]
-            , div [ S.class [ S.col_span_4 ] ] [ viewResults model ]
+        , Html.div [ Css.class [ Css.grid, Css.grid_cols_7, Css.mw ] ]
+            [ Html.div [ Css.class [ Css.col_span_2, Css.ml_7, Css.pr_7, Css.flex, Css.flex_col ] ] [ viewFilterBar model ]
+            , Html.div [ Css.class [ Css.col_span_4 ] ] [ viewResults model ]
             ]
         ]
 
 
-viewResults : Model.Model -> Html Model.Msg
+viewResults : Model.Model -> Html.Html Model.Msg
 viewResults model =
     case model.queryResp of
-        RemoteData.NotAsked -> text "Initialising."
+        RemoteData.NotAsked -> Html.text "Initialising."
 
-        RemoteData.Loading -> text "Loading."
+        RemoteData.Loading -> Html.text "Loading."
 
-        RemoteData.Failure err -> text ( "Error: " ++ Model.Error.errorToString err )
+        RemoteData.Failure err -> Html.text ( "Error: " ++ Model.Error.errorToString err )
 
         RemoteData.Success resp -> results model resp
 
 
-viewFilterBar : Model.Model -> Html Model.Msg
+viewFilterBar : Model.Model -> Html.Html Model.Msg
 viewFilterBar model =
         case model.queryResp of
-            RemoteData.NotAsked -> text "Initialising."
+            RemoteData.NotAsked -> Html.text "Initialising."
 
-            RemoteData.Loading -> text "Loading."
+            RemoteData.Loading -> Html.text "Loading."
 
-            RemoteData.Failure err -> text ( "Error: " ++ Model.Error.errorToString err )
+            RemoteData.Failure err -> Html.text ( "Error: " ++ Model.Error.errorToString err )
 
             RemoteData.Success resp -> filterBar model resp
 
 
-results : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html Model.Msg
+results : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html.Html Model.Msg
 results model resp =
-    div []
-        [ div [ S.class
-                [ S.border_b
-                , S.border_c_grey
-                , S.border_solid
-                ] ]
-            [ span [] [ text ( String.fromInt
+    Html.div []
+        [ Html.div [ Css.class [ Css.border_b, Css.border_c_grey, Css.border_solid ] ]
+            [ Html.span [] [ Html.text
+                ( String.fromInt
                 ( List.length
                 ( List.map result
                 ( Model.DiscoveryEntity.sort
                 ( Model.DiscoveryEntity.removeExtensions model.extensionsNotShown
                 ( Model.DiscoveryEntity.removeObjectTypes model.objectTypesNotShown
                 ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) ) model.sortType) ) ) ++ " resultaten voor \"" ++ model.query ++ "\"" ) ]
-            , div [ S.class [ S.float_right ] ] [ sortDropdown model ]
+            , Html.div [ Css.class [ Css.float_right ] ] [ sortDropdown model ]
             ] --result info
-        , div []
+        , Html.div []
             ( List.map result
-                ( Model.DiscoveryEntity.sort
-                ( Model.DiscoveryEntity.removeExtensions model.extensionsNotShown
-                ( Model.DiscoveryEntity.removeObjectTypes model.objectTypesNotShown
-                ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) ) model.sortType) ) -- results
+            ( Model.DiscoveryEntity.sort
+            ( Model.DiscoveryEntity.removeExtensions model.extensionsNotShown
+            ( Model.DiscoveryEntity.removeObjectTypes model.objectTypesNotShown
+            ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) ) model.sortType) ) -- results
         ]
 
 
-result : Model.DiscoveryEntity.DiscoveryEntity -> Html Model.Msg
+result : Model.DiscoveryEntity.DiscoveryEntity -> Html.Html Model.Msg
 result discoveryEntity =
-    a [ Route.href Route.Entity ] [ div [ S.class
-                [ S.border_b
-                , S.border_c_grey
-                , S.border_solid
-                , S.grid
-                , S.grid_cols_5
-                ]
+    Html.a [ Route.href Route.Entity ]
+        [ Html.div
+            [ Css.class [ Css.border_b, Css.border_c_grey, Css.border_solid, Css.grid, Css.grid_cols_5 ]
             , Html.Attributes.id discoveryEntity.guid
-            , onClick ( Model.QueryEntity discoveryEntity )
+            , Html.Events.onClick ( Model.QueryEntity discoveryEntity )
             ]
-            [ div [] [ img [ Asset.getTypeIcon discoveryEntity.objectType, S.class [ S.m_auto, S.type_icon ] ] [] ] -- type
-            , span [ S.class
-                    [ S.col_span_4
-                    , S.text_2xl
-                    ] ] [ text discoveryEntity.name ] -- name
-            , span [ S.class
-                    [ S.col_span_4
-                    , S.py_3
-                    ] ] [ text ( "Laatst gewijzigd: " ++ ( Date.toIsoString ( Date.fromPosix Time.utc ( Time.millisToPosix discoveryEntity.updateTime ) ) ) ) ] -- date
-            ] ]
+            [ Html.div [] [ Html.img [ Asset.getTypeIcon discoveryEntity.objectType, Css.class [ Css.m_auto, Css.type_icon ] ] [] ] -- type
+            , Html.span [ Css.class [ Css.col_span_4, Css.text_2xl ] ] [ Html.text discoveryEntity.name ] -- name
+            , Html.span [ Css.class [ Css.col_span_4, Css.py_3 ] ] [ Html.text ( "Laatst gewijzigd: " ++ ( Date.toIsoString ( Date.fromPosix Time.utc ( Time.millisToPosix discoveryEntity.updateTime ) ) ) ) ] -- date
+            ]
+        ]
 
 
-sortDropdown : Model.Model -> Html Model.Msg
+sortDropdown : Model.Model -> Html.Html Model.Msg
 sortDropdown model =
-    div []
-        [ span [ S.class [ S.inline_block ] ] [ text "Sorteren op " ]
-        , div [ S.class [ S.inline_block ] ]
-            [ div [  onClick Model.UpdateDropdownShown, S.class [ S.inline_block ] ]
+    Html.div []
+        [ Html.span [ Css.class [ Css.inline_block ] ] [ Html.text "Sorteren op " ]
+        , Html.div [ Css.class [ Css.inline_block ] ]
+            [ Html.div [ Html.Events.onClick Model.UpdateDropdownShown, Css.class [ Css.inline_block ] ]
                 [ sortSelectedText model.sortType
-                , span [ S.class [ S.sort_option, S.text_c_red ] ] [ text ( if model.dropdownShown then "^  " else "v  " ) ]
+                , Html.span [ Css.class [ Css.sort_option, Css.text_c_red ] ] [ Html.text ( if model.dropdownShown then "^  " else "v  " ) ]
                 ]
-            , div [ S.class [ dropdownShown model.dropdownShown, S.dropdown_content ] ]
-                [ div [ onClick ( Model.UpdateSortType Model.DiscoveryEntity.Relevance ) ] [ sortSelectedText Model.DiscoveryEntity.Relevance ]
-                , div [ onClick ( Model.UpdateSortType Model.DiscoveryEntity.Name ) ] [ sortSelectedText Model.DiscoveryEntity.Name ]
-                , div [ onClick ( Model.UpdateSortType Model.DiscoveryEntity.DateAsc ) ] [ sortSelectedText Model.DiscoveryEntity.DateAsc ]
-                , div [ onClick ( Model.UpdateSortType Model.DiscoveryEntity.DateDesc ) ] [ sortSelectedText Model.DiscoveryEntity.DateDesc ]
+            , Html.div [ Css.class [ dropdownShown model.dropdownShown, Css.dropdown_content ] ]
+                [ Html.div [ Html.Events.onClick ( Model.UpdateSortType Model.DiscoveryEntity.Relevance ) ] [ sortSelectedText Model.DiscoveryEntity.Relevance ]
+                , Html.div [ Html.Events.onClick ( Model.UpdateSortType Model.DiscoveryEntity.Name ) ] [ sortSelectedText Model.DiscoveryEntity.Name ]
+                , Html.div [ Html.Events.onClick ( Model.UpdateSortType Model.DiscoveryEntity.DateAsc ) ] [ sortSelectedText Model.DiscoveryEntity.DateAsc ]
+                , Html.div [ Html.Events.onClick ( Model.UpdateSortType Model.DiscoveryEntity.DateDesc ) ] [ sortSelectedText Model.DiscoveryEntity.DateDesc ]
                 ]
             ]
         ]
@@ -131,136 +115,85 @@ sortDropdown model =
 
 dropdownShown : Bool -> String
 dropdownShown shown =
-    if shown then "" else S.hidden
+    if shown then
+        ""
+    else
+        Css.hidden
 
 
-sortSelectedText : Model.DiscoveryEntity.SortType -> Html Model.Msg
+sortSelectedText : Model.DiscoveryEntity.SortType -> Html.Html Model.Msg
 sortSelectedText sortType =
     case sortType of
         Model.DiscoveryEntity.Relevance ->
-            span [ S.class [ S.sort_option, S.text_c_red ] ] [ text "  Relevantie  " ]
+            Html.span [ Css.class [ Css.sort_option, Css.text_c_red ] ] [ Html.text "  Relevantie  " ]
 
         Model.DiscoveryEntity.Name ->
-            span [ S.class [ S.sort_option, S.text_c_red ] ] [ text "  Naam  " ]
+            Html.span [ Css.class [ Css.sort_option, Css.text_c_red ] ] [ Html.text "  Naam  " ]
 
         Model.DiscoveryEntity.DateAsc ->
-            span [ S.class [ S.sort_option, S.text_c_red ] ] [ text "  Datum ↑  " ]
+            Html.span [ Css.class [ Css.sort_option, Css.text_c_red ] ] [ Html.text "  Datum ↑  " ]
 
         Model.DiscoveryEntity.DateDesc ->
-            span [ S.class [ S.sort_option, S.text_c_red ] ] [ text "  Datum ↓  " ]
+            Html.span [ Css.class [ Css.sort_option, Css.text_c_red ] ] [ Html.text "  Datum ↓  " ]
 
 
-smallSearchBar : Model.Model -> Html Model.Msg
+smallSearchBar : Model.Model -> Html.Html Model.Msg
 smallSearchBar model =
-    div [ S.class
-            [ S.bg_c_grey
-            , S.w_full
-            , S.mb_3
+    Html.div [ Css.class [ Css.bg_c_grey, Css.w_full, Css.mb_3 ] ]
+        [ Html.div [ Css.class [ Css.mw, Css.grid, Css.grid_cols_7 ] ]
+            [ Html.h1
+                [ Css.class [ Css.text_white, Css.text_2xl, Css.font_bold, Css.py_7, Css.col_span_2 ] ]
+                [ Html.span [ Css.class [ Css.bg_c_brown, Css.px_7, Css.py_13px, Css.mx_7, Css.inline_block ] ] [ Html.text "Resultaten" ] ]
+            , Html.div [ Css.class [ Css.py_7, Css.col_span_4 ] ]
+                [ Html.label [ Html.Attributes.for "searchbar", Css.class [ Css.hidden ] ] [ Html.text "Zoek in data" ]
+                , Html.div [ Css.class [ Css.w_full, Css.h_full, Css.max_w_fit ] ]
+                    [ Html.input
+                        [ Css.class [ Css.w_400px, Css.ml_7, Css.px_7, Css.py_15px, Css.text_xl, Css.border_transparent, Css.focus_border_transparent, Css.float_left ]
+                        , Html.Attributes.id "searchbar"
+                        , Html.Attributes.type_ "text"
+                        , Html.Attributes.placeholder "Zoek in data"
+                        , Html.Attributes.value model.query
+                        , Html.Events.onInput Model.UpdateQuery
+                        ] []
+                    , Html.button
+                        [ Html.Attributes.type_ "button"
+                        , Css.class [ Css.bg_c_red, Css.float_right, Css.border, Css.border_c_red ]
+                        , Html.Events.onClick (Model.QueryQuery model.query)
+                        ] [ Html.i [ Css.class [ Css.material_icons, Css.text_white, Css.search_icon, Css.p_10px ] ] [ Html.text "search" ] ]
+                    ]
+                ]
             ]
         ]
-        [ div
-            [ S.class
-                [ S.mw
-                , S.grid
-                , S.grid_cols_7
-                ]
-            ]
-            [ h1
-                [ S.class
-                    [ S.text_white
-                    , S.text_2xl
-                    , S.font_bold
-                    , S.py_7
-                    , S.col_span_2
-                    ]
-                ]
-                [ span [ S.class
-                    [ S.bg_c_brown
-                    , S.px_7
-                    , S.py_13px
-                    , S.mx_7
-                    , S.inline_block
-                    ] ] [ text "Resultaten" ] ]
-            , div
-                [ S.class
-                    [ S.py_7
-                    , S.col_span_4
-                    ]
-                ]
-                [ label [ Html.Attributes.for "searchbar", S.class [ S.hidden ] ] [ text "Zoek in data" ]
-                , div
-                    [ S.class
-                        [ S.w_full
-                        , S.h_full
-                        , S.max_w_fit
-                        ]
-                    ]
-                    [ input
-                    [ S.class
-                        [ S.w_400px
-                        , S.ml_7
-                        , S.px_7
-                        , S.py_15px
-                        , S.text_xl
-                        , S.border_transparent
-                        , S.focus_border_transparent
-                        , S.float_left
-                        ]
-                    , Html.Attributes.id "searchbar"
-                    , Html.Attributes.type_ "text"
-                    , Html.Attributes.placeholder "Zoek in data"
-                    , Html.Attributes.value model.query
-                    , onInput Model.UpdateQuery
-                    ] []
-                    , button
-                        [ Html.Attributes.type_ "button"
-                        , S.class
-                            [ S.bg_c_red
-                            , S.float_right
-                            , S.border
-                            , S.border_c_red
-                            ]
-                        , onClick (Model.QueryQuery model.query)
-                        ]
-                        [ i [ S.class
-                                [ S.material_icons
-                                , S.text_white
-                                , S.search_icon
-                                , S.p_10px
-                                ] ] [ text "search" ] ]
-                    ]
-                ]
-        ] ]
 
 
-filterBar : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html Model.Msg
+filterBar : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html.Html Model.Msg
 filterBar model resp =
-    div []
-        [ div [ S.class [ S.pb_3 ] ]
+    Html.div []
+        [ Html.div [ Css.class [ Css.pb_3 ] ]
             [ filterBarObjectTypeButton model
             , filterBarObjectTypeForm model resp
             ] -- object types
-        , div [ S.class [ S.pb_3 ] ]
+        , Html.div [ Css.class [ Css.pb_3 ] ]
             [ filterBarExtensionButton model
             , filterBarExtensionForm model resp
             ] -- extensions
-        , div [] [] -- glossary
+        , Html.div [] [] -- glossary
         ]
 
 
-filter : ( String -> Bool -> Model.Msg ) -> List String -> String -> Html Model.Msg
+filter : ( String -> Bool -> Model.Msg ) -> List String -> String -> Html.Html Model.Msg
 filter f e s =
-    div []
-        [ input
+    Html.div []
+        [ Html.input
             [ Html.Attributes.type_ "checkbox"
             , Html.Attributes.name s
             , Html.Attributes.id s
             , Html.Attributes.value s
-            , S.class [ S.accent_c_red ]
-            , onCheck ( f s)
+            , Css.class [ Css.accent_c_red ]
+            , Html.Events.onCheck ( f s)
             , Html.Attributes.checked ( not ( List.member s e ) )
             ] []
-        , label [ Html.Attributes.for s, S.class [ S.pl_3 ] ] [ text s ]
+        , Html.label [ Html.Attributes.for s, Css.class [ Css.pl_3 ] ] [ Html.text s ]
         ]
 
 
@@ -280,73 +213,73 @@ onExtensionFilterCheck s e =
         Model.RemoveExtensionNotShown s
 
 
-filterBarObjectTypeButton : Model.Model -> Html Model.Msg
+filterBarObjectTypeButton : Model.Model -> Html.Html Model.Msg
 filterBarObjectTypeButton model =
     if model.objectTypeFilterShown then
-        button
+        Html.button
             [ Html.Attributes.type_ "button"
-            , S.class [ S.border_b, S.border_c_grey, S.w_175px, S.text_justify ]
-            , onClick Model.UpdateObjectTypeFilterShown
+            , Css.class [ Css.border_b, Css.border_c_grey, Css.w_175px, Css.text_justify ]
+            , Html.Events.onClick Model.UpdateObjectTypeFilterShown
             ]
-            [ i [ S.class [ S.material_icons, S.text_c_red, S.filter_icon, S.p_2px, S.bg_c_grey ] ] [ text "remove" ]
-            , span [ S.class [ S.pl_3, S.text_xl ] ] [ text "Type" ]
+            [ Html.i [ Css.class [ Css.material_icons, Css.text_c_red, Css.filter_icon, Css.p_2px, Css.bg_c_grey ] ] [ Html.text "remove" ]
+            , Html.span [ Css.class [ Css.pl_3, Css.text_xl ] ] [ Html.text "Type" ]
             ]
     else
-        button
+        Html.button
             [ Html.Attributes.type_ "button"
-            , S.class [ S.border_b, S.border_c_grey, S.w_175px, S.text_justify ]
-            , onClick Model.UpdateObjectTypeFilterShown
+            , Css.class [ Css.border_b, Css.border_c_grey, Css.w_175px, Css.text_justify ]
+            , Html.Events.onClick Model.UpdateObjectTypeFilterShown
             ]
-            [ i [ S.class [ S.material_icons, S.text_white, S.filter_icon, S.p_2px, S.bg_c_red ] ] [ text "add" ]
-            , span [ S.class [ S.pl_3, S.text_xl ] ] [ text "Type" ]
+            [ Html.i [ Css.class [ Css.material_icons, Css.text_white, Css.filter_icon, Css.p_2px, Css.bg_c_red ] ] [ Html.text "add" ]
+            , Html.span [ Css.class [ Css.pl_3, Css.text_xl ] ] [ Html.text "Type" ]
             ]
 
 
-filterBarExtensionButton : Model.Model -> Html Model.Msg
+filterBarExtensionButton : Model.Model -> Html.Html Model.Msg
 filterBarExtensionButton model =
         if model.extensionFilterShown then
-            button
+            Html.button
                 [ Html.Attributes.type_ "button"
-                , S.class [ S.border_b, S.border_c_grey, S.w_175px, S.text_justify ]
-                , onClick Model.UpdateExtensionFilterShown
+                , Css.class [ Css.border_b, Css.border_c_grey, Css.w_175px, Css.text_justify ]
+                , Html.Events.onClick Model.UpdateExtensionFilterShown
                 ]
-                [ i [ S.class [ S.material_icons, S.text_c_red, S.filter_icon, S.p_2px, S.bg_c_grey ] ] [ text "remove" ]
-                , span [ S.class [ S.pl_3, S.text_xl ] ] [ text "Extensie" ]
+                [ Html.i [ Css.class [ Css.material_icons, Css.text_c_red, Css.filter_icon, Css.p_2px, Css.bg_c_grey ] ] [ Html.text "remove" ]
+                , Html.span [ Css.class [ Css.pl_3, Css.text_xl ] ] [ Html.text "Extensie" ]
                 ]
         else
-            button
+            Html.button
                 [ Html.Attributes.type_ "button"
-                , S.class [ S.border_b, S.border_c_grey, S.w_175px, S.text_justify ]
-                , onClick Model.UpdateExtensionFilterShown
+                , Css.class [ Css.border_b, Css.border_c_grey, Css.w_175px, Css.text_justify ]
+                , Html.Events.onClick Model.UpdateExtensionFilterShown
                 ]
-                [ i [ S.class [ S.material_icons, S.text_white, S.filter_icon, S.p_2px, S.bg_c_red ] ] [ text "add" ]
-                , span [ S.class [ S.pl_3, S.text_xl ] ] [ text "Extensie" ]
+                [ Html.i [ Css.class [ Css.material_icons, Css.text_white, Css.filter_icon, Css.p_2px, Css.bg_c_red ] ] [ Html.text "add" ]
+                , Html.span [ Css.class [ Css.pl_3, Css.text_xl ] ] [ Html.text "Extensie" ]
                 ]
 
 
-filterBarObjectTypeForm : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html Model.Msg
+filterBarObjectTypeForm : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html.Html Model.Msg
 filterBarObjectTypeForm model resp =
     if model.objectTypeFilterShown then
-        form []
+        Html.form []
             ( List.map ( filter onObjectTypeFilterCheck model.objectTypesNotShown )
             ( Model.DiscoveryEntity.getObjectTypes
             ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) )
     else
-        form [ S.class [ S.hidden ] ]
+        Html.form [ Css.class [ Css.hidden ] ]
             ( List.map ( filter onObjectTypeFilterCheck model.objectTypesNotShown )
             ( Model.DiscoveryEntity.getObjectTypes
             ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) )
 
 
-filterBarExtensionForm : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html Model.Msg
+filterBarExtensionForm : Model.Model -> Model.QueryResp.DiscoveryQueryResp -> Html.Html Model.Msg
 filterBarExtensionForm model resp =
         if model.extensionFilterShown then
-            form []
+            Html.form []
                 ( List.map ( filter onExtensionFilterCheck model.extensionsNotShown )
                 ( Model.DiscoveryEntity.getExtensions
                 ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) )
         else
-            form [ S.class [ S.hidden ] ]
+            Html.form [ Css.class [ Css.hidden ] ]
                 ( List.map ( filter onExtensionFilterCheck model.extensionsNotShown )
                 ( Model.DiscoveryEntity.getExtensions
                 ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) )

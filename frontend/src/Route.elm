@@ -25,7 +25,7 @@ href : Route -> Html.Attribute msg
 href target =
     Html.Attributes.href (routeToString target)
 
--- TEMP
+-- UNUSED
 {-
 replaceUrl : Nav.Key -> Route -> Cmd msg
 replaceUrl key route =
@@ -36,7 +36,7 @@ replaceUrl key route =
 fromUrl : Url.Url -> Maybe Route
 fromUrl url =
     { url | path = Maybe.withDefault "" url.fragment, fragment = Nothing }
-        |> Url.Parser.parse routeParser
+    |> Url.Parser.parse routeParser
 
 
 routeToString : Route -> String

@@ -1,24 +1,24 @@
 module Page.Home exposing (..)
 
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
+import Html
+import Html.Attributes
+import Html.Events
 
 import Model
-import CSSWrapper as S
+import Css
 import Route
 
 
 -- VIEW
 
 
-view : Model.Model -> Html Model.Msg
+view : Model.Model -> Html.Html Model.Msg
 view model =
-    div [ S.class [ S.bg_image ] ]
-        [ div [ S.class [ S.mw ] ]
-            [ h1 [ S.class [ S.pt_10, S.mp_text ] ] [ span [ S.class [ S.mp_span, S.p_7, S.mx_7 ] ] [ text "Zoek in datacatalogus" ] ]
+    Html.div [ Css.class [ Css.bg_image ] ]
+        [ Html.div [ Css.class [ Css.mw ] ]
+            [ Html.h1 [ Css.class [ Css.pt_10, Css.mp_text ] ] [ Html.span [ Css.class [ Css.mp_span, Css.p_7, Css.mx_7 ] ] [ Html.text "Zoek in datacatalogus" ] ]
             , searchBar model
-            , h1 [ S.class [ S.pt_10, S.mp_text_small ] ] [ span [ S.class [ S.mp_span_small, S.p_15x, S.mx_7, S.mt_6 ] ] [ text description ] ]
+            , Html.h1 [ Css.class [ Css.pt_10, Css.mp_text_small ] ] [ Html.span [ Css.class [ Css.mp_span_small, Css.p_15x, Css.mx_7, Css.mt_6 ] ] [ Html.text description ] ]
             ]
         ]
 
@@ -27,27 +27,27 @@ description : String
 description = "Welkom op de data catalogus van de provincie Utrecht. Op deze pagina is er de mogelijkheid om te zoeken naar alle datasets en informatieproducten die binnen de organisatie beschikbaar zijn. Voer een zoekterm in, voeg filters toe op de resultaten en vindt de juiste dataset."
 
 
-searchBar : Model.Model -> Html Model.Msg
+searchBar : Model.Model -> Html.Html Model.Msg
 searchBar model =
-    div [ S.class [ S.mt_32px ] ]
-        [ label
-            [ for "searchbar"
-            , type_ "text"
-            , placeholder "Zoek in datacatalogus"
-            , S.class [ S.hidden ]
+    Html.div [ Css.class [ Css.mt_32px ] ]
+        [ Html.label
+            [ Html.Attributes.for "searchbar"
+            , Html.Attributes.type_ "text"
+            , Html.Attributes.placeholder "Zoek in datacatalogus"
+            , Css.class [ Css.hidden ]
             ] []
-        , div [ S.class [ S.wh_full_mw_fit ] ]
-            [ input
-                [ id "searchbar"
-                , type_ "text"
-                , placeholder "Zoek in datacatalogus"
-                , value model.query
-                , onInput Model.UpdateQuery
-                , S.class [ S.mp_s, S.ml_7 ]
+        , Html.div [ Css.class [ Css.wh_full_mw_fit ] ]
+            [ Html.input
+                [ Html.Attributes.id "searchbar"
+                , Html.Attributes.type_ "text"
+                , Html.Attributes.placeholder "Zoek in datacatalogus"
+                , Html.Attributes.value model.query
+                , Html.Events.onInput Model.UpdateQuery
+                , Css.class [ Css.mp_s, Css.ml_7 ]
                 ] []
-            , a [ Route.href Route.Search ]
-                [ button [ type_ "button", S.class [ S.mp_s_button ], onClick (Model.QueryQuery model.query)  ]
-                    [ i [ S.class [ S.search_icon, S.p_15x, S.material_icons ] ] [ text "search" ]
+            , Html.a [ Route.href Route.Search ]
+                [ Html.button [ Html.Attributes.type_ "button", Css.class [ Css.mp_s_button ], Html.Events.onClick (Model.QueryQuery model.query)  ]
+                    [ Html.i [ Css.class [ Css.search_icon, Css.p_15x, Css.material_icons ] ] [ Html.text "search" ]
                     ]
                 ]
             ]
