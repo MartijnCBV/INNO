@@ -68,14 +68,19 @@ results model resp =
                 , S.border_c_grey
                 , S.border_solid
                 ] ]
-            [ span [] [ text ( ( String.fromInt resp.searchCount ) ++ " resultaten voor \"" ++ model.query ++ "\"" ) ]
+            [ span [] [ text ( String.fromInt
+                ( List.length
+                ( List.map result
+                ( Model.DiscoveryEntity.sort
+                ( Model.DiscoveryEntity.removeObjectTypes model.objectTypesNotShown
+                ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) model.sortType) ) ) ++ " resultaten voor \"" ++ model.query ++ "\"" ) ]
             , div [ S.class [ S.float_right ] ] [ sortDropdown model ]
             ] --result info
         , div []
             ( List.map result
                 ( Model.DiscoveryEntity.sort
-                    ( Model.DiscoveryEntity.removeObjectTypes model.objectTypesNotShown
-                        ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) model.sortType) ) -- results
+                ( Model.DiscoveryEntity.removeObjectTypes model.objectTypesNotShown
+                ( Model.DiscoveryEntity.removeGlossaryItems resp.value ) ) model.sortType) ) -- results
         ]
 
 
