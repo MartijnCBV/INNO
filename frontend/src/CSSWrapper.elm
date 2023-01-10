@@ -306,3 +306,11 @@ pl_3 = "pl-3"
 
 accent_c_red : String
 accent_c_red = "accent-c-red"
+
+
+mp_text_small : String
+mp_text_small = "mp-text-small"
+
+
+mp_span_small : String
+mp_span_small = "mp-span-small"

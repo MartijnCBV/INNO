@@ -16,13 +16,15 @@ view : Model.Model -> Html Model.Msg
 view model =
     div [ S.class [ S.bg_image ] ]
         [ div [ S.class [ S.mw ] ]
-            [ h1 [ S.class [ S.pt_10, S.mp_text ] ]
-                [ span [ S.class [ S.mp_span, S.p_7, S.mx_7 ] ] [ text "Zoek in datacatalogus" ]
-                ]
+            [ h1 [ S.class [ S.pt_10, S.mp_text ] ] [ span [ S.class [ S.mp_span, S.p_7, S.mx_7 ] ] [ text "Zoek in datacatalogus" ] ]
             , searchBar model
+            , h1 [ S.class [ S.pt_10, S.mp_text_small ] ] [ span [ S.class [ S.mp_span_small, S.p_15x, S.mx_7, S.mt_6 ] ] [ text description ] ]
             ]
         ]
 
+
+description : String
+description = "Welkom op de data catalogus van de provincie Utrecht. Op deze pagina is er de mogelijkheid om te zoeken naar alle datasets en informatieproducten die binnen de organisatie beschikbaar zijn. Voer een zoekterm in, voeg filters toe op de resultaten en vindt de juiste dataset."
 
 
 searchBar : Model.Model -> Html Model.Msg

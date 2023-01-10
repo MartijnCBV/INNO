@@ -43,6 +43,13 @@
     line-height: 2.25rem;
 }
 
+.mp-text-small {
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+}
+
 .text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -50,6 +57,11 @@
 
 .mp-span {
     background-color: rgb(35 27 27);
+    display: inline-block;
+}
+
+.mp-span-small {
+    background-color: rgb(229 53 44);
     display: inline-block;
 }
 
